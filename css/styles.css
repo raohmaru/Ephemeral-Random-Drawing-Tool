@@ -1,0 +1,88 @@
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	margin: 0;
+	color: #eee;
+	background-color: #5C6E76;
+	font-family: "Trebuchet MS", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+a {
+	color: #FFF;
+	text-decoration: none;
+}
+a:hover, a:focus {
+	text-decoration: underline;
+}
+.wrapper {
+	display: -webkit-flex;
+	display: flex;
+	 -webkit-flex-flow: column;
+	 flex-flow: column;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	height: 100%;
+}
+.header {
+	position: absolute;
+	top: 0;
+	left: 20px;
+}
+	.header__title {
+		font-size: 2em;
+		line-height: .5;
+		font-weight: 700;
+		color: #5C6E76;
+		text-shadow: 0 0 4px rgba(255, 255, 255, .65);
+	}
+canvas {
+	/* border: 1px solid #444; */
+	background-color: #000;
+}
+.settings {
+	position: absolute;
+	padding: 10px;
+    top: 0;
+    right: 0;
+	font-size: .8em;
+	border: solid 0 #aaa;
+	border-width: 0 0 1px 1px;
+}
+	.settings__fieldset {
+		margin: 0;
+		padding: 0 0 .4em;
+		border: 0;
+	}
+	input[type="range"] {
+		width: 6em;
+		vertical-align: middle;
+		padding: 0; /* MS */
+	}
+	.setting__value {
+		display: inline-block;
+		min-width: 1.15em;
+		color: #aaa;
+	}
+	select + label {
+		margin-left: .6em;
+	}
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 20px;
+}
+.siteinfo {
+	position: absolute;
+	right: 20px;
+	bottom: 0;
+}
+	.siteinfo__logo {
+		margin-left: .3em;
+		vertical-align: middle;
+	}
+.hidden {
+	display: none;
+}
