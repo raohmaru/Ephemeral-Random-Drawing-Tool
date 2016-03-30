@@ -3,7 +3,6 @@
 var canvas = document.getElementById('testcanvas'),
 	cnv_width  = canvas.width,
 	cnv_height = canvas.height,
-	fill_clear = 'rgba(0,0,0,.02)',
 	spacingCount = 0,
 	shapeColors = [
 		['rgb(255,255,255)'],  // None
@@ -24,23 +23,25 @@ var canvas = document.getElementById('testcanvas'),
 		x: 0,
 		y: 0
 	},
-	ctx, cnvRect, posX, posY, effectFunc, shapeFunc, rafId;
+	ctx, cnvRect, posX, posY, fill_clear, effectFunc, shapeFunc, rafId;
+// Constants
 var Round      = Math.round,
 	KEY_LEFT   = 37,
 	KEY_UP     = 38,
 	KEY_RIGHT  = 39,
 	KEY_DOWN   = 40,
+	KEY_P      = 80,
 	KEY_S      = 83,
 	KEY_CMD_S  = 19;  // OS X webkit browsers
+
+app.utils.eventDecorator(app);
 
 function start() {
 	app._canvas = canvas;
 	app._ctx = ctx;
 	app.settings
-		.on('change', optionsChanged)
+		.on(app.events.CHANGE, optionsChanged)
 		.init();
-	effectFunc = app.effects.getById(app.options.effect);
-	shapeFunc = app.shapes.getById(app.options.shape);
 	posX = cnv_width/2 | 0,
 	posY = cnv_height/2 | 0,
 	// canvas.addEventListener('mousemove', app.utils.throttle(mouseListener, 50));
@@ -49,7 +50,6 @@ function start() {
 	window.addEventListener('keydown', keyboardListener, false);
 	window.addEventListener('keyup', keyboardListener, false);
 	window.addEventListener('resize', resizeCanvas, false);
-	document.getElementById("saveAsPNG").addEventListener('click', saveAsPNG);
 	resizeCanvas();	
 	draw();
 }
@@ -72,17 +72,8 @@ function mouseListener(e) {
 		}		
 	}
 	else if(e.type === 'dblclick') {
-		if(rafId) {
-			cancelAnimationFrame(rafId);
-			rafId = undefined;
-		}
-		else {
-			draw();
-		}
+		app.pause(true);
 	}
-	
-	// drawShapes(x, y);
-	// draw();
 }
 
 function keyboardListener(e) {
@@ -94,11 +85,16 @@ function keyboardListener(e) {
 		else if(e.keyCode === KEY_RIGHT) keys.right = pressed;
 	}
 	
-	// Capture Ctrl + S
-	if(pressed && (e.keyCode === KEY_S && (e.ctrlKey || e.metaKey) || e.keyCode === KEY_CMD_S)) {
-		e.preventDefault();
-		saveAsPNG();
-		return false;
+	if(pressed) {
+		// Capture Ctrl + S		
+		if(e.keyCode === KEY_S && (e.ctrlKey || e.metaKey) || e.keyCode === KEY_CMD_S) {
+			e.preventDefault();
+			app.saveAsImage();
+			return false;
+		}
+		else if(e.keyCode == KEY_P) {
+			app.pause(true);
+		}
 	}
 }
 
@@ -133,8 +129,7 @@ function draw() {
 	}	
 	if(!app.options.spacing || spacingCount++ % app.options.spacing === 0) {
 		drawShape(posX, posY);		
-	}	
-	// ctx.clearRect(0, 0, cnv_width, cnv_height);
+	}
 	ctx.save();
 	effectFunc();
 	ctx.restore();
@@ -147,16 +142,18 @@ function draw() {
 
 function drawShape(x, y) {
 	var sz = app.options.size,
-		col = getColor(app.options.color);
-	if(app.options.variation > 0) {
-		sz += Round(app.utils.randomInt(0, app.options.variation) - app.options.variation/2);
+		col = getColor(app.options.color),
+		v = app.options.variation,
+		d = app.options.dispersionSize;
+	if(v > 0) {
+		sz += Round(app.utils.randomInt(0, v) - v/2);
 		if(sz < 1) {
 			sz = 1;
 		}
 	}
-	if(app.options.dispersion > 0) {
-		x += Round(app.utils.randomInt(0, app.options.dispersionSize) - app.options.dispersionSize/2);
-		y += Round(app.utils.randomInt(0, app.options.dispersionSize) - app.options.dispersionSize/2);
+	if(d > 0) {
+		x += Round(app.utils.randomInt(0, d) - d/2);
+		y += Round(app.utils.randomInt(0, d) - d/2);
 	}	
 	ctx.fillStyle   = col;
 	ctx.strokeStyle = col;
@@ -192,8 +189,7 @@ function moveCursorByKeys() {
 		velocity.x /= 1.1;
 		velocity.y /= 1.1;	
 		posX += velocity.x;
-		posY += velocity.y;
-	
+		posY += velocity.y;	
 		if     (posX < 0)          posX = 0;
 		else if(posX > cnv_width)  posX = cnv_width;
 		if     (posY < 0)          posY = 0;
@@ -201,19 +197,40 @@ function moveCursorByKeys() {
 	}
 }
 
-function saveAsPNG() {
-	cancelAnimationFrame(rafId);
+// Public methods
+app.saveAsImage = function(type, encoderOptions) {
+	app.pause();
 	
-	var exportCanvas = document.createElement("canvas"),
-		exportCtx = exportCanvas.getContext("2d");
+	var exportCanvas = document.createElement('canvas'),
+		exportCtx = exportCanvas.getContext('2d'),
+		type = type || 'image/png';
+		
 	exportCanvas.width = cnv_width;
 	exportCanvas.height = cnv_height;
 	exportCtx.fillStyle = '#000';
 	exportCtx.fillRect(0, 0, cnv_width, cnv_height);
 	exportCtx.drawImage(canvas, 0, 0);
-	window.open(exportCanvas.toDataURL());
+	window.open(exportCanvas.toDataURL(type, encoderOptions));
 	
-	draw();
+	app.resume();
+}
+
+app.pause = function(toggle) {
+	if(rafId) {
+		cancelAnimationFrame(rafId);
+		rafId = undefined;
+		app.dispatchEvent(app.events.PAUSE);
+	}
+	else if(toggle) {
+		app.resume();
+	}
+}
+
+app.resume = function() {
+	if(!rafId) {
+		draw();
+		app.dispatchEvent(app.events.RESUME);
+	}
 }
 
 

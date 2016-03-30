@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Canvas playground | raohmaru.com</title>
+	<title>Ephemeral Random Drawing Tool | raohmaru.com</title>
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -11,7 +11,8 @@
 <div class="wrapper">
 	<header class="header" role="banner">
 		<h1 class="header__title">Ephemeral Random Drawing Tool</h1>
-		<p><input type="button" id="saveAsPNG" value="Save as PNG" accesskey="S" /> or press <strong>Ctrl + S</strong></p>
+		<p><input type="button" value="Pause" class="button" title="Shortcut: P Key" accesskey="P" data-app-action="pause" />
+			<input type="button" value="Save as PNG" class="button" title="Shortcut: Ctrl + S" accesskey="S" data-app-action="save" /></p>
 	</header>
 	
 	<canvas id="testcanvas" width="500" height="500">
@@ -111,10 +112,12 @@
 	<img src="img/atom.png" alt="Atom symbol" id="imgAsset" />
 </div>
 
+<script src="js/events.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/effects.js"></script>
 <script src="js/shapes.js"></script>
 <script src="js/main.js"></script>
+<script src="js/components.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ screen, that becomes an random, ephemeral work of art.
 ## Hints
 + Change the settings of the pen or the canvas in the settings dialog.
 + Press `Ctrl+S` to create a snapshot of the canvas in PNG format (it will open in a new tab).
++ Press `P` key to pause or resume the animation.
 + Double click on the canvas to pause or resume the endless drawing pen.
 
 ## Browser Support
