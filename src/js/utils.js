@@ -40,7 +40,7 @@ app.utils.eventDecorator = function(obj) {
 		return this;
 	};
 	
-	obj.dispatchEvent = function(eventName) {
+	obj.trigger = function(eventName) {
 		if(_events[eventName]) {
 			var funcs = _events[eventName],
 				i = funcs.length-1,

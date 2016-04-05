@@ -1,6 +1,6 @@
 ;(function (app) { 'use strict';
 
-var canvas = document.getElementById('testcanvas'),
+var canvas = document.getElementById('maincanvas'),
 	cnv_width  = canvas.width,
 	cnv_height = canvas.height,
 	spacingCount = 0,
@@ -40,10 +40,10 @@ function start() {
 	app._canvas = canvas;
 	app._ctx = ctx;
 	app.settings
-		.on(app.events.CHANGE, optionsChanged)
+		.on('app:change', optionsChanged)
 		.init();
-	posX = cnv_width/2 | 0,
-	posY = cnv_height/2 | 0,
+	posX = cnv_width/2 | 0;
+	posY = cnv_height/2 | 0;
 	// canvas.addEventListener('mousemove', app.utils.throttle(mouseListener, 50));
 	canvas.addEventListener('mousemove', mouseListener);
 	canvas.addEventListener('dblclick', mouseListener);
@@ -219,7 +219,7 @@ app.pause = function(toggle) {
 	if(rafId) {
 		cancelAnimationFrame(rafId);
 		rafId = undefined;
-		app.dispatchEvent(app.events.PAUSE);
+		app.trigger('app:pause');
 	}
 	else if(toggle) {
 		app.resume();
@@ -229,7 +229,7 @@ app.pause = function(toggle) {
 app.resume = function() {
 	if(!rafId) {
 		draw();
-		app.dispatchEvent(app.events.RESUME);
+		app.trigger('app:resume');
 	}
 }
 

@@ -24,18 +24,18 @@ app.settings.init = function() {
 	app.options = options;
 	
 	Array.prototype.forEach.call(document.querySelectorAll('.settings select'), function(input){		
-		input.addEventListener(app.events.CHANGE, setOption, false);
+		input.addEventListener('change', setOption, false);
 		setOption(input);
 	});
 	
 	Array.prototype.forEach.call(document.querySelectorAll('.settings input[type="range"]'), function(input){		
 		input.addEventListener('input', updateRangeValue, false);
-		input.addEventListener(app.events.CHANGE, setRange, false);
+		input.addEventListener('change', setRange, false);
 		setRange(input);
 	});
 	
 	Array.prototype.forEach.call(document.querySelectorAll('.settings input[type="checkbox"]'), function(input){		
-		input.addEventListener(app.events.CHANGE, setBoolOption, false);
+		input.addEventListener('change', setBoolOption, false);
 		setBoolOption(input);
 	});
 	
@@ -45,13 +45,13 @@ app.settings.init = function() {
 function setOption(e) {
 	var tgt = e.target || e;
 	app.options[tgt.name] = parseInt(tgt.value, 10);
-	app.settings.dispatchEvent(app.events.CHANGE, tgt.name, app.options[tgt.name]);
+	app.settings.trigger('app:change', tgt.name, app.options[tgt.name]);
 }
 
 function setRange(e) {
 	var tgt = e.target || e;
 	app.options[tgt.name] = parseInt(tgt.value, 10);
-	app.settings.dispatchEvent(app.events.CHANGE, tgt.name, app.options[tgt.name]);
+	app.settings.trigger('app:change', tgt.name, app.options[tgt.name]);
 	updateRangeValue(tgt);
 }
 
@@ -63,7 +63,7 @@ function updateRangeValue(e) {
 function setBoolOption(e) {
 	var tgt = e.target || e;
 	app.options[tgt.name] = tgt.checked;	
-	app.settings.dispatchEvent(app.events.CHANGE, tgt.name, app.options[tgt.name]);
+	app.settings.trigger('app:change', tgt.name, app.options[tgt.name]);
 }
 
 }(window.app || (window.app = {})));

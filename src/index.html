@@ -13,11 +13,11 @@
 <div class="wrapper">
 	<header class="header" role="banner">
 		<h1 class="header__title">Ephemeral Random Drawing Tool</h1>
-		<p><input type="button" value="Pause" class="button" title="Shortcut: P Key" accesskey="P" data-app-action="pause" />
-			<input type="button" value="Save as PNG" class="button" title="Shortcut: Ctrl + S" accesskey="S" data-app-action="save" /></p>
+		<p><input type="button" value="Pause" class="button" title="Shortcut: P Key" accesskey="P" data-app-btn="pause" />
+			<input type="button" value="Save as PNG" class="button" title="Shortcut: Ctrl + S" accesskey="S" data-app-btn="save" /></p>
 	</header>
 	
-	<canvas id="testcanvas" width="500" height="500">
+	<canvas id="maincanvas" width="500" height="500">
 		Your browser doesn't support the canvas element <strong>:(</strong>
 	</canvas>
 	
@@ -100,8 +100,8 @@
 	</section>
 	
 	<footer class="footer" role="contentinfo">
-		<p><a href="{link}" target="_blank">Download <strong>source</strong></a><br>
-			or <a href="{link}" target="_blank">View source at GitHub</a>
+		<p><a href="https://github.com/raohmaru/Ephemeral-Random-Drawing-Tool" target="_blank">Download <strong>source</strong></a><br>
+			or <a href="https://github.com/raohmaru/Ephemeral-Random-Drawing-Tool/archive/master.zip" target="_blank">View source at GitHub</a>
 		</p>
 	</footer>
 	
@@ -115,7 +115,6 @@
 </div>
 
 <!-- build:js -->
-<script src="js/events.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/effects.js"></script>

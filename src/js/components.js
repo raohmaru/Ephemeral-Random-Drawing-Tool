@@ -1,10 +1,10 @@
 ;(function (app) { 'use strict';
 
-Array.prototype.forEach.call(document.querySelectorAll('[data-app-action]'), function(el){
-	if(el.dataset.appAction === 'pause') {
+Array.prototype.forEach.call(document.querySelectorAll('[data-app-btn]'), function(el){
+	if(el.dataset.appBtn === 'pause') {
 		PauseButton(el);
 	}
-	else if(el.dataset.appAction === 'save') {
+	else if(el.dataset.appBtn === 'save') {
 		SaveButton(el);
 	}
 });
@@ -12,10 +12,10 @@ Array.prototype.forEach.call(document.querySelectorAll('[data-app-action]'), fun
 function PauseButton(el){
 	el.addEventListener('click', function(){ app.pause(true); });
 	app
-		.on(app.events.PAUSE, function(){
+		.on('app:pause', function(){
 			el.value = 'Resume';
 		})
-		.on(app.events.RESUME, function(){
+		.on('app:resume', function(){
 			el.value = 'Pause';
 		});
 }
