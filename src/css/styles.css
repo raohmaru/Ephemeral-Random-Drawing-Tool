@@ -38,6 +38,13 @@ a:hover, a:focus {
 		color: #5C6E76;
 		text-shadow: 0 0 4px rgba(255, 255, 255, .75);
 	}
+		.header__version {
+			font-size: 50%;
+			font-weight: 400;
+			color: #A6B3BA;
+			text-shadow: none;
+			vertical-align: super;
+		}
 .button {
     color: #fff;
     background: transparent;

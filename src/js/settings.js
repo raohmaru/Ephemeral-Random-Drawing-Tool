@@ -14,7 +14,7 @@ var options = {
 		color     : 0,
 		mouse     : true,
 		rotation  : 0,
-		ghost     : 8
+		ghost     : 7
 	};
 	
 app.settings = app.settings || {};
