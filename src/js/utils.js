@@ -11,7 +11,7 @@ app.utils.randomInt = function(min, max) {
 		min = 0;
 	}
 	return Math.round( Math.random()*(max-min) + min );
-}
+};
 
 // http://sampsonblog.com/749/simple-throttle-function
 app.utils.throttle = function(callback, limit) {
@@ -24,8 +24,8 @@ app.utils.throttle = function(callback, limit) {
                 wait = false;
             }, limit);
         }
-    }
-}
+    };
+};
 
 app.utils.eventDecorator = function(obj) {
 	var _events = {};	
@@ -52,7 +52,7 @@ app.utils.eventDecorator = function(obj) {
 			}
 		}
 		return this;
-	}
+	};
 };
 
 app.utils.store = (function() {
@@ -71,7 +71,3 @@ app.utils.store = (function() {
 	
 	
 }(window.app || (window.app = {})));
-
-// RequestAnimationFrame
-// https://gist.github.com/paulirish/1579671
-!function(){for(var n=0,i=["ms","moz","webkit","o"],e=0;e<i.length&&!window.requestAnimationFrame;++e)window.requestAnimationFrame=window[i[e]+"RequestAnimationFrame"],window.cancelAnimationFrame=window[i[e]+"CancelAnimationFrame"]||window[i[e]+"CancelRequestAnimationFrame"];window.requestAnimationFrame||(window.requestAnimationFrame=function(i){var e=(new Date).getTime(),a=Math.max(0,16-(e-n)),o=window.setTimeout(function(){i(e+a)},a);return n=e+a,o}),window.cancelAnimationFrame||(window.cancelAnimationFrame=function(n){clearTimeout(n)})}();
