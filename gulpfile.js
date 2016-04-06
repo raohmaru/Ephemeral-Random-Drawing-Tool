@@ -26,6 +26,7 @@ var SRC            = 'src/',
 	OUTPUT_JS      = 'app.js',
 	OUTPUT_CSS     = 'styles.css',
 	ENTRY_POINT    = SRC + 'index.html',
+	JS_GLOB        = SRC + DIR_JS  + '*.js',
 	CSS_GLOB       = SRC + DIR_CSS + '**/*.css',
 	IMG_GLOB       = SRC + DIR_IMG + '**/*';
 
@@ -38,10 +39,13 @@ gulp.task('clean', function() {
 });
 
 gulp.task('scripts', function() {
-	gutil.log('... linting, concatening and minifying scripts');
-	return gulp.src(getJSSrcFromHTML(ENTRY_POINT))
+	gutil.log('... linting JS files');
+	gulp.src(JS_GLOB)
 		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'))
+		.pipe(jshint.reporter('jshint-stylish'));
+	
+	gutil.log('... concatening and minifying scripts');	
+	return gulp.src(getJSSrcFromHTML(ENTRY_POINT))
 		.pipe(concat({path: OUTPUT_JS, cwd: ''}))  // Sourcemaps and concat needs cwd:''
 		.pipe(sourcemaps.init())
 		.pipe(uglify())

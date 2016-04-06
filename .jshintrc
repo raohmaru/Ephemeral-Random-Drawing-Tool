@@ -1,0 +1,3 @@
+{
+	"-W008": true  // Suppresses warnings for leading decimal point .0
+}

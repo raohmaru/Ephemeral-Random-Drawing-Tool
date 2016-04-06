@@ -66,6 +66,6 @@ app.effects.getById = function(id) {
 	if(id === 4) return effectScale;
 	if(id === 5) return effectSkew;
 	return effectNone;
-}
+};
 
 }(window.app || (window.app = {})));

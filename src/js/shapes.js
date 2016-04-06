@@ -18,7 +18,12 @@ var shapeNone = function() {},
 	shapeCircle = function(x, y, sz) {
 		app._ctx.beginPath();
 		app._ctx.arc(x, y, sz, 0, PI2);		
-		app.options.fill ? app._ctx.fill() : app._ctx.stroke();
+		if(app.options.fill) {
+			app._ctx.fill();
+		}
+		else {
+			app._ctx.stroke();
+		}
 	},
 	
 	shapeText = function(x, y, sz) {
@@ -88,7 +93,7 @@ app.shapes.getById = function(id) {
 		}
 		drawFunc(x, y, sz);
 		postDraw();
-	}
-}
+	};
+};
 
 }(window.app || (window.app = {})));

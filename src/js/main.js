@@ -61,7 +61,7 @@ function resizeCanvas() {
 		right : rect.right | 0,
 		bottom: rect.bottom | 0,
 		left  : rect.left | 0
-	}
+	};
 }
 
 function mouseListener(e) {
@@ -111,8 +111,8 @@ function optionsChanged(name, val) {
 	}
 	else if(name === 'ghost') {
 		if(app.options.ghost < 10) {
-			var val = 10 - app.options.ghost;
-			fill_clear = 'rgba(0,0,0,.0' + val + ')';
+			var ghostVal = 10 - app.options.ghost;
+			fill_clear = 'rgba(0,0,0,.0' + ghostVal + ')';
 		}
 		else {
 			fill_clear = false;
@@ -202,8 +202,8 @@ app.saveAsImage = function(type, encoderOptions) {
 	app.pause();
 	
 	var exportCanvas = document.createElement('canvas'),
-		exportCtx = exportCanvas.getContext('2d'),
-		type = type || 'image/png';
+		exportCtx = exportCanvas.getContext('2d');
+	type = type || 'image/png';
 		
 	exportCanvas.width = cnv_width;
 	exportCanvas.height = cnv_height;
@@ -213,7 +213,7 @@ app.saveAsImage = function(type, encoderOptions) {
 	window.open(exportCanvas.toDataURL(type, encoderOptions));
 	
 	app.resume();
-}
+};
 
 app.pause = function(toggle) {
 	if(rafId) {
@@ -224,14 +224,14 @@ app.pause = function(toggle) {
 	else if(toggle) {
 		app.resume();
 	}
-}
+};
 
 app.resume = function() {
 	if(!rafId) {
 		draw();
 		app.trigger('app:resume');
 	}
-}
+};
 
 
 // App start
