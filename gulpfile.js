@@ -10,10 +10,10 @@ var gulp       = require('gulp'),
 	clean      = require('gulp-clean'),
 	rev        = require('gulp-rev'),
 	htmlrepl   = require('gulp-html-replace'),
+	jshint     = require('gulp-jshint'),
 	through    = require('through2'),
 	fs         = require('fs'),
 	runseq     = require('run-sequence');
-	// jshint = require('gulp-jshint'),
 	
 var revHashes = {};
 
@@ -40,8 +40,8 @@ gulp.task('clean', function() {
 gulp.task('scripts', function() {
 	gutil.log('... linting, concatening and minifying scripts');
 	return gulp.src(getJSSrcFromHTML(ENTRY_POINT))
-		// .pipe(jshint())
-		// .pipe(jshint.reporter('jshint-stylish'))
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(concat({path: OUTPUT_JS, cwd: ''}))  // Sourcemaps and concat needs cwd:''
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
