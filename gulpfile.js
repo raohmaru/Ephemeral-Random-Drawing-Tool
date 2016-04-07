@@ -38,12 +38,14 @@ gulp.task('clean', function() {
 		.pipe(clean());
 });
 
-gulp.task('scripts', function() {
+gulp.task('jshint', function() {
 	gutil.log('... linting JS files');
-	gulp.src(JS_GLOB)
+	return gulp.src(JS_GLOB)
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'));
-	
+});
+
+gulp.task('scripts', ['jshint'], function() {
 	gutil.log('... concatening and minifying scripts');	
 	return gulp.src(getJSSrcFromHTML(ENTRY_POINT))
 		.pipe(concat({path: OUTPUT_JS, cwd: ''}))  // Sourcemaps and concat needs cwd:''
@@ -80,7 +82,6 @@ gulp.task('html', ['scripts', 'css'], function() {
 		}))
 		.pipe(gulp.dest(DEST));
 });
-
 
 gulp.task('copy', function() {
 	gutil.log('... copying assets to dist');
@@ -127,7 +128,7 @@ function getRevHashes() {
 }
 
 
-gulp.task('default', ['clean', 'scripts', 'css', 'html', 'copy']);
+gulp.task('default', ['jshint']);
 
 gulp.task('build', function(done) {
 	runseq('clean', 'html', 'copy', done);
