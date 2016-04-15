@@ -16,13 +16,9 @@ a:hover, a:focus {
 	text-decoration: underline;
 }
 .wrapper {
-	display: -webkit-flex;
 	display: flex;
-	 -webkit-flex-flow: column;
-	 flex-flow: column;
-	-webkit-align-items: center;
+	flex-flow: column;
 	align-items: center;
-	-webkit-justify-content: center;
 	justify-content: center;
 	height: 100%;
 }

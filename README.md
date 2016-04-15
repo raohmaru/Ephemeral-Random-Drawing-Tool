@@ -14,5 +14,11 @@ screen, that becomes an random, ephemeral work of art.
 ## Browser Support
 Tested on Firefox, Chrome and Internet Explorer 11.
 
+## Building
+The [gulp](http://gulpjs.com/) file has tasks to build a production version of the tool or lint the JS files.
+Available tasks:
++ `grunt` runs [JSHint](http://jshint.com/about/).
++ `grunt build` builds the production version with the source minified.
+
 ### License
 Released under the WTFPL license.

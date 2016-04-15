@@ -11,6 +11,8 @@ var gulp       = require('gulp'),
 	rev        = require('gulp-rev'),
 	htmlrepl   = require('gulp-html-replace'),
 	jshint     = require('gulp-jshint'),
+	postcss    = require('gulp-postcss'),
+	autoprefix = require('autoprefixer'),
 	through    = require('through2'),
 	fs         = require('fs'),
 	runseq     = require('run-sequence');
@@ -50,11 +52,10 @@ gulp.task('scripts', ['jshint'], function() {
 	return gulp.src(getJSSrcFromHTML(ENTRY_POINT))
 		.pipe(concat({path: OUTPUT_JS, cwd: ''}))  // Sourcemaps and concat needs cwd:''
 		.pipe(sourcemaps.init())
-		.pipe(uglify())
-		// Only minify if gulp is ran with '--type production'
-		// .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+		// Only minify if gulp is ran with '--dev'
+		.pipe(!gutil.env.dev ? uglify() : gutil.noop())
 		.pipe(rev())
-		.pipe(rename({ extname: '.min.js' }))
+		.pipe(!gutil.env.dev ? rename({ extname: '.min.js' }) : gutil.noop())
 		.pipe(getRevHashes())
 		.pipe(sourcemaps.write(DIR_SOURCEMAPS))
 		.pipe(gulp.dest(DEST + DIR_JS));
@@ -65,9 +66,11 @@ gulp.task('css', function() {
 	return gulp.src(CSS_GLOB)
 		.pipe(concat({path: OUTPUT_CSS, cwd: ''}))  // Sourcemaps with rev needs cwd:''
 		.pipe(sourcemaps.init())
-		.pipe(cssnano())
+		.pipe(postcss([ autoprefix({ browsers: ['last 2 versions'] }) ]))
+		// Only minify if gulp is ran with '--dev'
+		.pipe(!gutil.env.dev ? cssnano() : gutil.noop())
 		.pipe(rev())
-		.pipe(rename({ extname: '.min.css' }))
+		.pipe(!gutil.env.dev ? rename({ extname: '.min.css' }) : gutil.noop())
 		.pipe(getRevHashes())
 		.pipe(sourcemaps.write(DIR_SOURCEMAPS))
 		.pipe(gulp.dest(DEST + DIR_CSS));
