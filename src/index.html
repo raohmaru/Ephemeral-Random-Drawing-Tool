@@ -12,9 +12,10 @@
 <body>
 <div class="wrapper">
 	<header class="header" role="banner">
-		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.0</span></h1>
-		<p><input type="button" value="Pause" class="button" title="Shortcut: P Key" accesskey="P" data-app-btn="pause" />
-			<input type="button" value="Save as PNG" class="button" title="Shortcut: Ctrl + S" accesskey="S" data-app-btn="save" /></p>
+		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.1</span></h1>
+		<p><input type="button" value="Pause" class="button" title="Shortcut: P Key" accesskey="P" data-app-comp="pause" />
+			<input type="button" value="Save as PNG" class="button" title="Shortcut: Ctrl + S" accesskey="S" data-app-comp="save" /></p>
+		<p>Share your work <a href="http://twitter.com" title="Share on Twitter" data-app-comp="share-twitter">Twitter</a></p>
 	</header>
 	
 	<canvas id="maincanvas" width="500" height="500">
@@ -121,7 +122,9 @@
 <script src="js/effects.js"></script>
 <script src="js/shapes.js"></script>
 <script src="js/main.js"></script>
-<script src="js/components.js"></script>
+<script src="js/comp/save.js"></script>
+<script src="js/comp/pause.js"></script>
+<script src="js/comp/share-twitter.js"></script>
 <!-- endbuild -->
 </body>
 </html>

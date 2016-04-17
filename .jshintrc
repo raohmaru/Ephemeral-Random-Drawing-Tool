@@ -1,3 +1,18 @@
 {
-	"-W008": true  // Suppresses warnings for leading decimal point .0
+	"-W008": true, // Suppresses warnings for leading decimal point .0
+	"eqeqeq": true,
+	"eqnull": true,
+	"expr": true,
+	"onevar": true,
+	"noarg": true,
+	"browser": true,
+	"trailing": true,
+	"undef": true,
+	"unused": "vars",
+	"globals": {
+		"window": false,
+		"document": false,
+		"screen": false,
+		"console": false
+	}
 }

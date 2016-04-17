@@ -52,6 +52,7 @@ function start() {
 	window.addEventListener('resize', resizeCanvas, false);
 	resizeCanvas();	
 	draw();
+	setState('running');
 }
 
 function resizeCanvas() {
@@ -89,10 +90,10 @@ function keyboardListener(e) {
 		// Capture Ctrl + S		
 		if(e.keyCode === KEY_S && (e.ctrlKey || e.metaKey) || e.keyCode === KEY_CMD_S) {
 			e.preventDefault();
-			app.saveAsImage();
+			window.open(app.toDataURL());
 			return false;
 		}
-		else if(e.keyCode == KEY_P) {
+		else if(e.keyCode === KEY_P) {
 			app.pause(true);
 		}
 	}
@@ -197,9 +198,14 @@ function moveCursorByKeys() {
 	}
 }
 
+function setState(newState) {
+	state = newState;
+}
+
+
 // Public methods
-app.saveAsImage = function(type, encoderOptions) {
-	var isRunning = (state == 'running');
+app.toDataURL = function(type, encoderOptions) {
+	var isRunning = (state === 'running');
 	if(isRunning) {
 		app.pause();		
 	}
@@ -213,18 +219,19 @@ app.saveAsImage = function(type, encoderOptions) {
 	exportCtx.fillStyle = '#000';
 	exportCtx.fillRect(0, 0, cnv_width, cnv_height);
 	exportCtx.drawImage(canvas, 0, 0);
-	window.open(exportCanvas.toDataURL(type, encoderOptions));
 	
 	if(isRunning) {
 		app.resume();
 	}
+	
+	return exportCanvas.toDataURL(type, encoderOptions);
 };
 
 app.pause = function(toggle) {
-	if(rafId) {
-		cancelAnimationFrame(rafId);
+	if(state === 'running') {
+		window.cancelAnimationFrame(rafId);
 		rafId = undefined;
-		state = 'paused';
+		setState('paused');
 		app.trigger('app:pause');
 	}
 	else if(toggle) {
@@ -233,9 +240,9 @@ app.pause = function(toggle) {
 };
 
 app.resume = function() {
-	if(!rafId) {
+	if(state === 'paused') {
 		draw();
-		state = 'running';
+		setState('running');
 		app.trigger('app:resume');
 	}
 };
