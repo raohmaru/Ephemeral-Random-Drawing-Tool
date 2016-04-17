@@ -28,7 +28,7 @@ var SRC            = 'src/',
 	OUTPUT_JS      = 'app.js',
 	OUTPUT_CSS     = 'styles.css',
 	ENTRY_POINT    = SRC + 'index.html',
-	JS_GLOB        = SRC + DIR_JS  + '*.js',
+	JS_GLOB        = [SRC + DIR_JS + '**/*.js', '!' + SRC + DIR_JS + 'lib/*'],
 	CSS_GLOB       = SRC + DIR_CSS + '**/*.css',
 	IMG_GLOB       = SRC + DIR_IMG + '**/*';
 
