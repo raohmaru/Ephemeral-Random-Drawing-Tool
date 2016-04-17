@@ -23,7 +23,7 @@ var canvas = document.getElementById('maincanvas'),
 		x: 0,
 		y: 0
 	},
-	ctx, cnvRect, posX, posY, fill_clear, effectFunc, shapeFunc, rafId;
+	ctx, cnvRect, posX, posY, fill_clear, effectFunc, shapeFunc, rafId, state;
 // Constants
 var Round      = Math.round,
 	KEY_LEFT   = 37,
@@ -199,7 +199,10 @@ function moveCursorByKeys() {
 
 // Public methods
 app.saveAsImage = function(type, encoderOptions) {
-	app.pause();
+	var isRunning = (state == 'running');
+	if(isRunning) {
+		app.pause();		
+	}
 	
 	var exportCanvas = document.createElement('canvas'),
 		exportCtx = exportCanvas.getContext('2d');
@@ -212,13 +215,16 @@ app.saveAsImage = function(type, encoderOptions) {
 	exportCtx.drawImage(canvas, 0, 0);
 	window.open(exportCanvas.toDataURL(type, encoderOptions));
 	
-	app.resume();
+	if(isRunning) {
+		app.resume();
+	}
 };
 
 app.pause = function(toggle) {
 	if(rafId) {
 		cancelAnimationFrame(rafId);
 		rafId = undefined;
+		state = 'paused';
 		app.trigger('app:pause');
 	}
 	else if(toggle) {
@@ -229,6 +235,7 @@ app.pause = function(toggle) {
 app.resume = function() {
 	if(!rafId) {
 		draw();
+		state = 'running';
 		app.trigger('app:resume');
 	}
 };
