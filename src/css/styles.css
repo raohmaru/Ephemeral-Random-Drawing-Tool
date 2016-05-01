@@ -97,6 +97,14 @@ canvas {
 		margin-left: .3em;
 		vertical-align: middle;
 	}
-.hidden {
+.is-hidden {
 	display: none;
 }
+.is-disabled {
+	opacity: .5;
+	cursor: default;
+}
+	.is-disabled:hover,
+	.is-disabled:focus {
+		text-decoration: none;
+	}
