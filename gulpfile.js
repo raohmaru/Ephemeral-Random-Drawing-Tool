@@ -30,7 +30,7 @@ var SRC            = 'src/',
 	ENTRY_POINT    = SRC + 'index.html',
 	JS_GLOB        = [SRC + DIR_JS + '**/*.js', '!' + SRC + DIR_JS + 'lib/*'],
 	CSS_GLOB       = SRC + DIR_CSS + '**/*.css',
-	IMG_GLOB       = SRC + DIR_IMG + '**/*';
+	ASSETS_GLOB    = [SRC + DIR_IMG + '**/*', SRC + '.htaccess', SRC + 'gallery/*'];
 
 // Deletes the DEST directory
 gulp.task('clean', function() {
@@ -52,7 +52,7 @@ gulp.task('scripts', ['jshint'], function() {
 	return gulp.src(getJSSrcFromHTML(ENTRY_POINT))
 		.pipe(concat({path: OUTPUT_JS, cwd: ''}))  // Sourcemaps and concat needs cwd:''
 		.pipe(sourcemaps.init())
-		// Only minify if gulp is ran with '--dev'
+		// Don't minify if gulp is ran with '--dev'
 		.pipe(!gutil.env.dev ? uglify() : gutil.noop())
 		.pipe(rev())
 		.pipe(!gutil.env.dev ? rename({ extname: '.min.js' }) : gutil.noop())
@@ -67,7 +67,7 @@ gulp.task('css', function() {
 		.pipe(concat({path: OUTPUT_CSS, cwd: ''}))  // Sourcemaps with rev needs cwd:''
 		.pipe(sourcemaps.init())
 		.pipe(postcss([ autoprefix({ browsers: ['last 2 versions'] }) ]))
-		// Only minify if gulp is ran with '--dev'
+		// Don't minify if gulp is ran with '--dev'
 		.pipe(!gutil.env.dev ? cssnano() : gutil.noop())
 		.pipe(rev())
 		.pipe(!gutil.env.dev ? rename({ extname: '.min.css' }) : gutil.noop())
@@ -88,8 +88,8 @@ gulp.task('html', ['scripts', 'css'], function() {
 
 gulp.task('copy', function() {
 	gutil.log('... copying assets to dist');
-	return gulp.src(IMG_GLOB)
-		.pipe(gulp.dest(DEST + DIR_IMG));
+	return gulp.src(ASSETS_GLOB, {base: SRC})
+		.pipe(gulp.dest(DEST));
 });
 
 /**
