@@ -32,7 +32,7 @@ a:hover, a:focus {
 		line-height: .5;
 		font-weight: 700;
 		color: #5C6E76;
-		text-shadow: 0 0 4px rgba(255, 255, 255, .75);
+		text-shadow: 0 0 4px rgb(255, 255, 255);
 	}
 		.header__version {
 			font-size: 50%;
@@ -108,3 +108,13 @@ canvas {
 	.is-disabled:focus {
 		text-decoration: none;
 	}
+.icon {
+	vertical-align: text-bottom;
+}
+a > .icon {
+	opacity: .75;
+}
+a:hover > .icon,
+a:focus > .icon {
+	opacity: 1;
+}
