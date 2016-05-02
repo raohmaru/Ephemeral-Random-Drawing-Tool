@@ -15,8 +15,8 @@ function ShareButton(el){
 			return;
 		}		
 		
-		var imgdata = app.toDataURL(),
-			params = 'imgdata=' + imgdata.replace('data:image/png;base64,', ''),
+		var imgdata = app.toDataURL('image/jpeg', 1),
+			params = 'imgdata=' + imgdata.replace('data:image/jpeg;base64,', ''),
 			xhr = new XMLHttpRequest();
 		xhr.open('POST', 'gallery/upload', true);
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
