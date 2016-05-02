@@ -1,3 +1,4 @@
+<?php require('php/session.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,7 +108,7 @@
 	</footer>
 	
 	<aside role="complementary" class="siteinfo">
-		<p>&copy; 2016 <a href="http://raohmaru.com/" target="_blank">raohmaru.com</a> <img src="http://raohmaru.com/img/raohmaru_logo_white.png" class="siteinfo__logo" alt="raohmaru.com logo" width="26" /></p>
+		<p>&copy; 2016 <a href="http://raohmaru.com/" target="_blank">raohmaru.com <img src="http://raohmaru.com/img/raohmaru_logo_white.png" class="siteinfo__logo" alt="raohmaru.com logo" width="26" /></a></p>
 	</aside>
 </div>
 
@@ -126,5 +127,8 @@
 <script src="js/comp/pause.js"></script>
 <script src="js/comp/share-twitter.js"></script>
 <!-- endbuild -->
+<script>
+var __csrftoken = '<?php echo $_SESSION['csrf_token']; ?>';
+</script>
 </body>
 </html>

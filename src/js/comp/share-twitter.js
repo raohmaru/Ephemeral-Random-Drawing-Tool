@@ -16,10 +16,11 @@ function ShareButton(el){
 		}		
 		
 		var imgdata = app.toDataURL('image/jpeg', 1),
-			params = 'imgdata=' + imgdata.replace('data:image/jpeg;base64,', ''),
+			params = 'imgdata=' + imgdata.replace('data:image/jpeg;base64,', '') +
+					 '&__csrftoken=' + encodeURIComponent(window.__csrftoken),
 			xhr = new XMLHttpRequest();
 		xhr.open('POST', 'gallery/upload', true);
-		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 		xhr.setRequestHeader("Content-length", params.length);
 		xhr.addEventListener("progress", function(e) {
 			if(e.lengthComputable) {
