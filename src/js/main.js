@@ -1,8 +1,6 @@
 ;(function (app) { 'use strict';
 
 var canvas = document.getElementById('maincanvas'),
-	cnv_width  = canvas.width,
-	cnv_height = canvas.height,
 	spacingCount = 0,
 	keys = {
 		up   : false,
@@ -32,8 +30,8 @@ function start() {
 		.on('app:change', optionsChanged)
 		.init();
 	app.cursor = {
-		x: cnv_width/2  | 0,
-		y: cnv_height/2 | 0
+		x: app.canvas.intWidth/2  | 0,
+		y: app.canvas.intHeight/2 | 0
 	};
 	window.addEventListener('keydown', keyboardListener, false);
 	window.addEventListener('keyup', keyboardListener, false);
@@ -95,12 +93,10 @@ function draw() {
 	if(!app.options.spacing || spacingCount++ % app.options.spacing === 0) {
 		canvas.drawShape(app.cursor.x, app.cursor.y, shapeFunc);
 	}
-	ctx.save();
 	effectFunc();
-	ctx.restore();
 	if(fill_clear) {		
 		ctx.fillStyle = fill_clear;
-		ctx.fillRect(0, 0, cnv_width, cnv_height);
+		ctx.fillRect(0, 0, app.canvas.intWidth, app.canvas.intHeight);
 	}	
 	rafId = window.requestAnimationFrame(draw);
 }
@@ -117,9 +113,9 @@ function moveCursorByKeys() {
 		app.cursor.x += velocity.x;
 		app.cursor.y += velocity.y;	
 		if     (app.cursor.x < 0)          app.cursor.x = 0;
-		else if(app.cursor.x > cnv_width)  app.cursor.x = cnv_width;
+		else if(app.cursor.x > app.canvas.intWidth)  app.cursor.x = app.canvas.intWidth;
 		if     (app.cursor.y < 0)          app.cursor.y = 0;
-		else if(app.cursor.y > cnv_height) app.cursor.y = cnv_height;
+		else if(app.cursor.y > app.canvas.intHeight) app.cursor.y = app.canvas.intHeight;
 	}
 }
 
@@ -139,10 +135,10 @@ app.toDataURL = function(type, encoderOptions) {
 		exportCtx = exportCanvas.getContext('2d');
 	type = type || 'image/png';
 		
-	exportCanvas.width = cnv_width;
-	exportCanvas.height = cnv_height;
+	exportCanvas.width = app.canvas.intWidth;
+	exportCanvas.height = app.canvas.intHeight;
 	exportCtx.fillStyle = '#000';
-	exportCtx.fillRect(0, 0, cnv_width, cnv_height);
+	exportCtx.fillRect(0, 0, app.canvas.intWidth, app.canvas.intHeight);
 	exportCtx.drawImage(canvas, 0, 0);
 	
 	if(isRunning) {

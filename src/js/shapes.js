@@ -64,7 +64,6 @@ function drawRect(x, y, w, h) {
 
 function preDraw(x, y) {
 	if(app.options.rotation) {
-		app.canvas.ctx.save();
 		app.canvas.ctx.translate(x, y);
 		app.canvas.ctx.rotate(app.options.rotation * PI / 180);
 		return [0, 0];
@@ -73,7 +72,7 @@ function preDraw(x, y) {
 
 function postDraw(param) {
 	if(app.options.rotation) {
-		app.canvas.ctx.restore();
+		app.canvas.reset();
 	}
 }
 
