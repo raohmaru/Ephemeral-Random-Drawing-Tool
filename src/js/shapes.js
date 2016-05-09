@@ -16,13 +16,13 @@ var shapeNone = function() {},
 	},
 	
 	shapeCircle = function(x, y, sz) {
-		app._ctx.beginPath();
-		app._ctx.arc(x, y, sz, 0, PI2);		
+		app.canvas.ctx.beginPath();
+		app.canvas.ctx.arc(x, y, sz, 0, PI2);		
 		if(app.options.fill) {
-			app._ctx.fill();
+			app.canvas.ctx.fill();
 		}
 		else {
-			app._ctx.stroke();
+			app.canvas.ctx.stroke();
 		}
 	},
 	
@@ -30,11 +30,11 @@ var shapeNone = function() {},
 		var text = LETTERS[app.utils.randomInt(LETTERS.length-1)];
 		x = (x - sz/2)|0;
 		y = (y + sz/2)|0;
-		app._ctx.font = sz + 'px "Trebuchet MS", Arial, "Helvetica Neue", Helvetica, sans-serif';
+		app.canvas.ctx.font = sz + 'px "Trebuchet MS", Arial, "Helvetica Neue", Helvetica, sans-serif';
 		if(app.options.fill)
-			app._ctx.fillText(text, x, y);
+			app.canvas.ctx.fillText(text, x, y);
 		else
-			app._ctx.strokeText(text, x, y);
+			app.canvas.ctx.strokeText(text, x, y);
 	},
 
 	shapeLine = function(x, y, sz) {
@@ -48,7 +48,7 @@ var shapeNone = function() {},
 		var image = app.utils.store('imgAsset');
 		x = (x - sz/2)|0;
 		y = (y - sz/2)|0;
-		app._ctx.drawImage(image, x, y, sz, sz);
+		app.canvas.ctx.drawImage(image, x, y, sz, sz);
 	};
 	
 function drawRect(x, y, w, h) {
@@ -57,23 +57,23 @@ function drawRect(x, y, w, h) {
 	y = (y - h/2)|0;
 	// if(app.utils.randomInt())
 	if(app.options.fill)
-		app._ctx.fillRect(x, y, w, h);
+		app.canvas.ctx.fillRect(x, y, w, h);
 	else
-		app._ctx.strokeRect(x, y, w, h);
+		app.canvas.ctx.strokeRect(x, y, w, h);
 }
 
 function preDraw(x, y) {
 	if(app.options.rotation) {
-		app._ctx.save();
-		app._ctx.translate(x, y);
-		app._ctx.rotate(app.options.rotation * PI / 180);
+		app.canvas.ctx.save();
+		app.canvas.ctx.translate(x, y);
+		app.canvas.ctx.rotate(app.options.rotation * PI / 180);
 		return [0, 0];
 	}
 }
 
 function postDraw(param) {
 	if(app.options.rotation) {
-		app._ctx.restore();
+		app.canvas.ctx.restore();
 	}
 }
 

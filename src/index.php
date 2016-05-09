@@ -27,7 +27,7 @@
 		<fieldset class="settings__fieldset">
 			<label for="settings-shape">Shape:</label>
 			<select name="shape" id="settings-shape">
-				<option value="1">Square</option>
+				<option value="1" selected>Square</option>
 				<option value="2">Circle</option>
 				<option value="3">Letter</option>
 				<option value="4">Line</option>
@@ -62,7 +62,7 @@
 				<option value="-1">Random</option>
 			</select>
 			<label for="settings-mouse">Mouse</label>
-			<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked />
+			<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked title="Move the pen with the mouse or the keyboard direction keys" />
 		</fieldset>
 		<fieldset class="settings__fieldset">
 			<label for="settings-size">Size:</label>
@@ -123,6 +123,7 @@
 <script src="js/effects.js"></script>
 <script src="js/shapes.js"></script>
 <script src="js/main.js"></script>
+<script src="js/comp/canvas.js"></script>
 <script src="js/comp/save.js"></script>
 <script src="js/comp/pause.js"></script>
 <script src="js/comp/share-twitter.js"></script>

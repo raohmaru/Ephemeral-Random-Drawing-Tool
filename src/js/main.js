@@ -4,15 +4,6 @@ var canvas = document.getElementById('maincanvas'),
 	cnv_width  = canvas.width,
 	cnv_height = canvas.height,
 	spacingCount = 0,
-	shapeColors = [
-		['rgb(255,255,255)'],  // None
-		['rgb(0,0,255)', 'rgb(0,0,128)', 'rgb(0,50,200)', '#5463e7'],  // Marine
-		['#f4da46', '#e9cb52', '#fbe384', '#ffe391', '#fcef94', '#fff200'],  // Gold
-		['rgba(243,33,33,1,.75)', 'rgba(248,120,120,.75)', 'rgba(250,156,156,.75)', 'rgba(222,107,107,.75)'],  // Ruby
-		['rgba(176,187,223,.5)', 'rgba(30,210,179,.5)', 'rgba(166,227,234,.5)'],  // Watercolor
-		['#98ff75', '#a4f898', '#97f0b6', '#6ae680', '#8dde72', '#32e251'],  // Grass
-		{seq:['#9400D3', '#4B0082', '#0000FF', '#00FF00', '#FFFF00', '#FF7F00', '#FF0000']}  // Rainbow
-	],
 	keys = {
 		up   : false,
 		down : false,
@@ -23,10 +14,9 @@ var canvas = document.getElementById('maincanvas'),
 		x: 0,
 		y: 0
 	},
-	ctx, cnvRect, posX, posY, fill_clear, effectFunc, shapeFunc, rafId, state;
+	ctx, fill_clear, effectFunc, shapeFunc, rafId, state;
 // Constants
-var Round      = Math.round,
-	KEY_LEFT   = 37,
+var KEY_LEFT   = 37,
 	KEY_UP     = 38,
 	KEY_RIGHT  = 39,
 	KEY_DOWN   = 40,
@@ -37,44 +27,18 @@ var Round      = Math.round,
 app.utils.eventDecorator(app);
 
 function start() {
-	app._canvas = canvas;
-	app._ctx = ctx;
+	app.canvas = app.Canvas(canvas, ctx);
 	app.settings
 		.on('app:change', optionsChanged)
 		.init();
-	posX = cnv_width/2 | 0;
-	posY = cnv_height/2 | 0;
-	// canvas.addEventListener('mousemove', app.utils.throttle(mouseListener, 50));
-	canvas.addEventListener('mousemove', mouseListener);
-	canvas.addEventListener('dblclick', mouseListener);
+	app.cursor = {
+		x: cnv_width/2  | 0,
+		y: cnv_height/2 | 0
+	};
 	window.addEventListener('keydown', keyboardListener, false);
 	window.addEventListener('keyup', keyboardListener, false);
-	window.addEventListener('resize', resizeCanvas, false);
-	resizeCanvas();	
 	draw();
 	setState('running');
-}
-
-function resizeCanvas() {
-	var rect = canvas.getBoundingClientRect();
-	cnvRect = {
-		top   : rect.top | 0,
-		right : rect.right | 0,
-		bottom: rect.bottom | 0,
-		left  : rect.left | 0
-	};
-}
-
-function mouseListener(e) {
-	if(e.type === 'mousemove') {
-		if(app.options.mouse) {
-			posX = e.clientX - cnvRect.left;
-			posY = e.clientY - cnvRect.top;	
-		}		
-	}
-	else if(e.type === 'dblclick') {
-		app.pause(true);
-	}
 }
 
 function keyboardListener(e) {
@@ -129,7 +93,7 @@ function draw() {
 		moveCursorByKeys();
 	}	
 	if(!app.options.spacing || spacingCount++ % app.options.spacing === 0) {
-		drawShape(posX, posY);		
+		canvas.drawShape(app.cursor.x, app.cursor.y, shapeFunc);
 	}
 	ctx.save();
 	effectFunc();
@@ -141,45 +105,6 @@ function draw() {
 	rafId = window.requestAnimationFrame(draw);
 }
 
-function drawShape(x, y) {
-	var sz = app.options.size,
-		col = getColor(app.options.color),
-		v = app.options.variation,
-		d = app.options.dispersionSize;
-	if(v > 0) {
-		sz += Round(app.utils.randomInt(0, v) - v/2);
-		if(sz < 1) {
-			sz = 1;
-		}
-	}
-	if(d > 0) {
-		x += Round(app.utils.randomInt(0, d) - d/2);
-		y += Round(app.utils.randomInt(0, d) - d/2);
-	}	
-	ctx.fillStyle   = col;
-	ctx.strokeStyle = col;
-	ctx.lineWidth   = app.utils.randomInt(1, 4);
-	shapeFunc(x, y, sz);
-}
-
-function getColor(col) {
-	var colorset = shapeColors[col],
-		rint = app.utils.randomInt;
-	if(col === -1) {
-		return 'rgb(' + rint(255) + ',' + rint(255) + ',' + rint(255) + ')';
-	}
-	else {
-		if(colorset.seq) {
-			colorset.count = colorset.count + 1 || 0;
-			if(colorset.count >= colorset.seq.length) {
-				colorset.count = 0;
-			}
-			return colorset.seq[colorset.count];
-		}
-		return colorset[rint(colorset.length-1)];
-	}	
-}
-
 function moveCursorByKeys() {	
 	if     (keys.up)    velocity.y -= 1;
 	else if(keys.down)  velocity.y += 1;
@@ -189,12 +114,12 @@ function moveCursorByKeys() {
 	if(velocity.x > .001 || velocity.x < -.001 || velocity.y > .001 || velocity.y < -.001) {
 		velocity.x /= 1.1;
 		velocity.y /= 1.1;	
-		posX += velocity.x;
-		posY += velocity.y;	
-		if     (posX < 0)          posX = 0;
-		else if(posX > cnv_width)  posX = cnv_width;
-		if     (posY < 0)          posY = 0;
-		else if(posY > cnv_height) posY = cnv_height;
+		app.cursor.x += velocity.x;
+		app.cursor.y += velocity.y;	
+		if     (app.cursor.x < 0)          app.cursor.x = 0;
+		else if(app.cursor.x > cnv_width)  app.cursor.x = cnv_width;
+		if     (app.cursor.y < 0)          app.cursor.y = 0;
+		else if(app.cursor.y > cnv_height) app.cursor.y = cnv_height;
 	}
 }
 
