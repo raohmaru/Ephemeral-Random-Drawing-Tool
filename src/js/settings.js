@@ -1,40 +1,29 @@
 ;(function (app) { 'use strict';
 
-var options = {
-		shape     : 1,
-		effect    : 1,
-		reverse   : false,
-		dir       : 1,
-		size      : 10,
-		variation : 10,
-		dispersion: 15,
-		spacing   : 2,
-		fill      : true,
-		speed     : 1,
-		color     : 0,
-		mouse     : true,
-		rotation  : 0,
-		ghost     : 7
-	};
+function Settings(selector){
+	// enforces new
+	if (!(this instanceof Settings))
+		return new Settings(selector);
 	
-app.settings = app.settings || {};
-app.utils.eventDecorator(app.settings);
+	// constructor body
+	this.el = document.querySelector(selector);
+	app.utils.eventDecorator(this);
+}
+var proto = Settings.prototype;
 
-app.settings.init = function() {
-	app.options = options;
-	
-	Array.prototype.forEach.call(document.querySelectorAll('.settings select'), function(input){		
+proto.init = function() {
+	[].forEach.call(this.el.querySelectorAll('select'), function(input){		
 		input.addEventListener('change', setOption, false);
 		setOption(input);
 	});
 	
-	Array.prototype.forEach.call(document.querySelectorAll('.settings input[type="range"]'), function(input){		
+	[].forEach.call(this.el.querySelectorAll('input[type="range"]'), function(input){		
 		input.addEventListener('input', updateRangeValue, false);
 		input.addEventListener('change', setRange, false);
 		setRange(input);
 	});
 	
-	Array.prototype.forEach.call(document.querySelectorAll('.settings input[type="checkbox"]'), function(input){		
+	[].forEach.call(this.el.querySelectorAll('input[type="checkbox"]'), function(input){		
 		input.addEventListener('change', setBoolOption, false);
 		setBoolOption(input);
 	});
@@ -65,5 +54,7 @@ function setBoolOption(e) {
 	app.options[tgt.name] = tgt.checked;	
 	app.settings.trigger('app:change', tgt.name, app.options[tgt.name]);
 }
+
+app.Settings = Settings;
 
 }(window.app || (window.app = {})));

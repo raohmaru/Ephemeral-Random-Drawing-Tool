@@ -42,13 +42,13 @@ function Canvas(canvas, ctx) {
 	
 	canvas.center = function() {
 		ctx.translate(Round(canvas.intWidth/2), Round(canvas.intHeight/2));
-	}
+	};
 
 	canvas.redraw = function(x, y) {
 		x = x || 0;
 		y = y || 0;
 		ctx.drawImage(canvas, x, y);
-	}
+	};
 	
 	canvas.reset = function() {
 		// reset current transformation matrix to the identity matrix

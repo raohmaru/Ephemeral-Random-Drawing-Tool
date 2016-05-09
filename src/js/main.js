@@ -26,6 +26,8 @@ app.utils.eventDecorator(app);
 
 function start() {
 	app.canvas = app.Canvas(canvas, ctx);
+	app.options = {};
+	app.settings = new app.Settings('.settings');
 	app.settings
 		.on('app:change', optionsChanged)
 		.init();
