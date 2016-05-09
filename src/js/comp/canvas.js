@@ -11,7 +11,13 @@ var COLORSET = [
 	],
 	Round = Math.round;
 
-function Canvas(canvas, ctx) {
+function Canvas(canvas, ctx) {	
+	canvas.ctx = ctx;	
+	canvas.addEventListener('mousemove', mouseListener);
+	canvas.addEventListener('dblclick', mouseListener);
+	window.addEventListener('resize', resizeCanvas, false);
+	resizeCanvas();		
+
 	function mouseListener(e) {
 		if(e.type === 'mousemove') {
 			if(app.options.mouse) {
@@ -48,13 +54,7 @@ function Canvas(canvas, ctx) {
 			}
 			return colorset[rint(colorset.length-1)];
 		}	
-	}	
-	
-	canvas.ctx = ctx;	
-	canvas.addEventListener('mousemove', mouseListener);
-	canvas.addEventListener('dblclick', mouseListener);
-	window.addEventListener('resize', resizeCanvas, false);
-	resizeCanvas();	
+	}
 	
 	canvas.drawShape = function(x, y, shapeFunc) {
 		var sz = app.options.size,
