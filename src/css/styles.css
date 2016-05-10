@@ -42,6 +42,8 @@ a:hover, a:focus {
 			vertical-align: super;
 		}
 .button {
+	padding: 0 .5em;
+	font-size: .875em;
     color: #fff;
     background: transparent;
     border: 1px solid #fff;
@@ -51,6 +53,7 @@ a:hover, a:focus {
 .button:focus,
 .button:hover {
 	opacity: 1;
+	text-decoration: none;
 }
 canvas {
 	/* border: 1px solid #444; */
@@ -58,16 +61,14 @@ canvas {
 }
 .settings {
 	position: absolute;
-	padding: 10px;
+	padding: .4em .7em;
     top: 0;
     right: 0;
-	font-size: .8em;
-	border: solid 0 #aaa;
-	border-width: 0 0 1px 1px;
+	background-color: #47565c;
 }
 	.settings__fieldset {
 		margin: 0;
-		padding: 0 0 .4em;
+		padding: 0 0 .2em;
 		border: 0;
 	}
 	.settings input[type="range"] {
@@ -78,12 +79,18 @@ canvas {
 	.setting__value {
 		display: inline-block;
 		min-width: 1.15em;
+		font-size: .8em;
 		color: #aaa;
 	}
-	.settings select + label {
+	.settings__label,
+	.settings__input {		
+		font-size: .8em;
+	}
+	.settings__input + .settings__label {
 		margin-left: .6em;
 	}
 	.settings__footer {
+		padding-top: .2em;
 		text-align: right;
 	}
 .footer {

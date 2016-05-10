@@ -17,10 +17,7 @@ var canvas = document.getElementById('maincanvas'),
 var KEY_LEFT   = 37,
 	KEY_UP     = 38,
 	KEY_RIGHT  = 39,
-	KEY_DOWN   = 40,
-	KEY_P      = 80,
-	KEY_S      = 83,
-	KEY_CMD_S  = 19;  // OS X webkit browsers
+	KEY_DOWN   = 40;
 
 app.utils.eventDecorator(app);
 
@@ -48,19 +45,8 @@ function keyboardListener(e) {
 		else if(e.keyCode === KEY_DOWN)  keys.down = pressed;
 		else if(e.keyCode === KEY_LEFT)  keys.left = pressed;
 		else if(e.keyCode === KEY_RIGHT) keys.right = pressed;
-	}
-	
-	if(pressed) {
-		// Capture Ctrl + S		
-		if(e.keyCode === KEY_S && (e.ctrlKey || e.metaKey) || e.keyCode === KEY_CMD_S) {
-			e.preventDefault();
-			window.open(app.toDataURL());
-			return false;
-		}
-		else if(e.keyCode === KEY_P) {
-			app.pause(true);
-		}
-	}
+	}	
+	app.trigger('app:'+e.type, e);
 }
 
 function optionsChanged(name, val) {
