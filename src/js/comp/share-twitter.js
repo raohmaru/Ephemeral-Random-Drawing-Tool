@@ -14,42 +14,24 @@ function ShareButton(el){
 		if(el.classList.contains('is-disabled')) {
 			return;
 		}		
-		
-		var imgdata = app.toDataURL('image/jpeg', 1),
-			params = 'imgdata=' + imgdata.replace('data:image/jpeg;base64,', '') +
-					 '&__csrftoken=' + encodeURIComponent(window.__csrftoken),
-			xhr = new XMLHttpRequest();
-		xhr.open('POST', 'gallery/upload', true);
-		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-		xhr.setRequestHeader("Content-length", params.length);
-		xhr.addEventListener("progress", function(e) {
-			if(e.lengthComputable) {
-				var percentComplete = (e.loaded / e.total) * 100;
-				console.log(percentComplete + '% uploaded');
-			}
-		});
-		xhr.addEventListener("load", function(){
-			if(this.status === 200) {
+		el.classList.add('is-disabled');
+		app.uploadImage(
+			// Done
+			function(xhr){
 				var left = Math.round((screen.width / 2) - (width / 2)),
 					top = (screen.height > height) ? Math.round((screen.height / 2) - (height / 2)) : 0; 
-				window.open(url+this.responseText, 'intent', winOptions + ',width=' + width +
+				window.open(url+xhr.responseText, 'intent', winOptions + ',width=' + width +
 							',height=' + height + ',left=' + left + ',top=' + top);
+			},
+			// Always
+			function(){
+				el.classList.remove('is-disabled');
 			}
-			else {
-				window.alert("An error occurred while saving your drawing to the cloud.");
-			}
-			el.classList.remove('is-disabled');
-		});	
-		xhr.addEventListener("error", function(){
-			window.alert("An error occurred while saving your drawing to the cloud.");
-			el.classList.remove('is-disabled');
-		});
-		el.classList.add('is-disabled');
-		xhr.send(params);
+		);
 	});
 }
 
-Array.prototype.forEach.call(document.querySelectorAll('[data-app-comp~=share-twitter]'), function(el){
+[].forEach.call(document.querySelectorAll('[data-app-comp~=share-twitter]'), function(el){
 	ShareButton(el);
 });
 

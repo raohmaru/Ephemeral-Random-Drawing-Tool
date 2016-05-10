@@ -170,6 +170,35 @@ app.resume = function() {
 	}
 };
 
+app.uploadImage = function(doneFunc, endFunc) {
+	var imgdata = app.toDataURL('image/jpeg', 1),
+		params = 'imgdata=' + imgdata.replace('data:image/jpeg;base64,', '') +
+				 '&__csrftoken=' + encodeURIComponent(window.__csrftoken),
+		xhr = new XMLHttpRequest();
+	xhr.open('POST', 'gallery/upload', true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+	xhr.setRequestHeader("Content-length", params.length);
+	xhr.addEventListener("progress", function(e) {
+		if(e.lengthComputable) {
+			var percentComplete = (e.loaded / e.total) * 100;
+			console.log(percentComplete + '% uploaded');
+		}
+	});
+	xhr.addEventListener("load", function(){
+		if(this.status === 200) {
+			doneFunc && doneFunc(this);
+		}
+		else {
+			window.alert("An error occurred while saving your drawing to the cloud.\n Please try again later.");
+		}
+		endFunc && endFunc();
+	});	
+	xhr.addEventListener("error", function(){
+		window.alert("An error occurred while saving your drawing to the cloud.\n Please try again later.");
+		endFunc && endFunc();
+	});
+	xhr.send(params);
+};
 
 // App start
 document.addEventListener('DOMContentLoaded', function(){

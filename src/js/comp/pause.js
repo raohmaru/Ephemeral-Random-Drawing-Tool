@@ -13,7 +13,7 @@ function PauseButton(el){
 		});
 }
 
-Array.prototype.forEach.call(document.querySelectorAll('[data-app-comp~=pause]'), function(el){
+[].forEach.call(document.querySelectorAll('[data-app-comp~=pause]'), function(el){
 	PauseButton(el);
 });
 

@@ -44,7 +44,7 @@ app.utils.eventDecorator = function(obj) {
 		if(_events[eventName]) {
 			var funcs = _events[eventName],
 				i = funcs.length-1,
-				args = Array.prototype.slice.call(arguments, 1),
+				args = [].slice.call(arguments, 1),
 				fun;
 			for(i; i>-1; --i) {
 				fun = funcs[i];

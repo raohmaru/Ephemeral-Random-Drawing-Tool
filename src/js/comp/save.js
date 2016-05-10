@@ -6,7 +6,7 @@ function SaveButton(el){
 	});
 }
 
-Array.prototype.forEach.call(document.querySelectorAll('[data-app-comp~=save]'), function(el){
+[].forEach.call(document.querySelectorAll('[data-app-comp~=save]'), function(el){
 	SaveButton(el);
 });
 
