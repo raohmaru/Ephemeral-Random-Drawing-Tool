@@ -14,8 +14,9 @@ var proto = Settings.prototype;
 proto.init = function() {
 	var defaults = app.utils.store.get('erdt-settings') || {};
 	this.inputs = this.el.querySelectorAll('select, input[type="range"], input[type="checkbox"]');
+	this.inputs = [].slice.call(this.inputs);  // To array
 	
-	[].forEach.call(this.inputs, function(input) {
+	this.inputs.forEach(function(input) {
 		if(defaults[input.name] !== undefined) {
 			if(input.type === 'checkbox') {
 				input.checked = defaults[input.name];
@@ -25,18 +26,10 @@ proto.init = function() {
 			}
 		}
 		if(input.type === 'range') {
-			input.addEventListener('input', updateRangeValue, false);
-			input.addEventListener('change', setRange, false);
-			setRange(input);			
+			input.addEventListener('input', updateRangeValue, false);	
 		}
-		else if(input.type === 'checkbox') {
-			input.addEventListener('change', setBoolOption, false);
-			setBoolOption(input);
-		}
-		else {
-			input.addEventListener('change', setOption, false);
-			setOption(input);
-		}
+		input.addEventListener('change', setValue, false);
+		setValue(input);
 	});
 	
 	app.utils.store.set('erdt-settings', app.options);	
@@ -49,27 +42,31 @@ proto.reset = function() {
 	// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
 	var event = document.createEvent('Event');
 	event.initEvent('change', true, true);
-	[].forEach.call(this.inputs, function(input) {
+	this.inputs.forEach(function(input) {
 		input.dispatchEvent(event);
 	});
 	localStorage.removeItem('erdt-settings');
 };
 
-function setOption(e) {
-	var tgt = e.target || e;
-	app.options[tgt.name] = parseInt(tgt.value, 10);
-	app.settings.trigger('app:change', tgt.name, app.options[tgt.name]);
-	// Save settings if triggered by user
-	if(e.target) {
-		app.utils.store.set('erdt-settings', app.options);		
-	}
-}
+proto.update = function() {
+	this.inputs.forEach(function(input) {
+		setValue(input);
+	});
+	app.utils.store.set('erdt-settings', app.options);	
+};
 
-function setRange(e) {
+function setValue(e) {
 	var tgt = e.target || e;
-	app.options[tgt.name] = parseInt(tgt.value, 10);
+	if(tgt.type === 'checkbox') {
+		app.options[tgt.name] = tgt.checked;	
+	}
+	else {		
+		app.options[tgt.name] = parseInt(tgt.value, 10);
+	}
 	app.settings.trigger('app:change', tgt.name, app.options[tgt.name]);
-	updateRangeValue(tgt);
+	if(tgt.type === 'range') {
+		updateRangeValue(tgt);
+	}
 	// Save settings if triggered by user
 	if(e.target) {
 		app.utils.store.set('erdt-settings', app.options);		
@@ -79,16 +76,6 @@ function setRange(e) {
 function updateRangeValue(e) {
 	var tgt = e.target || e;
 	document.getElementById(tgt.id+'__value').textContent = parseInt(tgt.value, 10);
-}
-
-function setBoolOption(e) {
-	var tgt = e.target || e;
-	app.options[tgt.name] = tgt.checked;	
-	app.settings.trigger('app:change', tgt.name, app.options[tgt.name]);
-	// Save settings if triggered by user
-	if(e.target) {
-		app.utils.store.set('erdt-settings', app.options);		
-	}
 }
 
 app.Settings = Settings;

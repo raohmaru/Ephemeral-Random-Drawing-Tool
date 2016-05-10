@@ -62,8 +62,8 @@
 					<option value="6">Rainbow</option>
 					<option value="-1">Random</option>
 				</select>
-				<label class="settings__label" for="settings-mouse">Mouse</label>
-				<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked title="Move the pen with the mouse or the keyboard direction keys" class="settings__input" />
+				<label class="settings__label" for="settings-mouse" title="Uncheck to move the pen with the keyboard direction keys">Mouse</label>
+				<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked class="settings__input" title="Uncheck to move the pen with the keyboard direction keys" />
 			</fieldset>
 			<fieldset class="settings__fieldset">
 				<label class="settings__label" for="settings-size">Size:</label>
@@ -101,6 +101,7 @@
 				<span id="settings-ghost__value" class="setting__value"></span>
 			</fieldset>
 			<fieldset class="settings__fieldset settings__footer">
+				<input type="button" value="Randomize" class="button" data-app-comp="random" />
 				<input type="button" value="Reset" class="button" data-app-comp="reset" />
 			</fieldset>		
 		</form>
@@ -132,6 +133,7 @@
 <script src="js/comp/save.js"></script>
 <script src="js/comp/pause.js"></script>
 <script src="js/comp/reset.js"></script>
+<script src="js/comp/randomize.js"></script>
 <script src="js/comp/share-twitter.js"></script>
 <!-- endbuild -->
 <script>

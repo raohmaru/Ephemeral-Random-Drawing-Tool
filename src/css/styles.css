@@ -6,6 +6,10 @@ body {
 	margin: 0;
 	color: #eee;
 	background-color: #5C6E76;
+}
+body,
+.button,
+.settings__input {	
 	font-family: "Trebuchet MS", Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 a {
