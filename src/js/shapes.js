@@ -42,10 +42,10 @@ var shapeNone = function() {},
 	},
 
 	shapeLogo = function(x, y, sz) {
-		if(!app.utils.store('imgAsset')) {
-			app.utils.store('imgAsset', document.getElementById("imgAsset"));
+		if(!app.utils.memoize('imgAsset')) {
+			app.utils.memoize('imgAsset', document.getElementById("imgAsset"));
 		}
-		var image = app.utils.store('imgAsset');
+		var image = app.utils.memoize('imgAsset');
 		x = (x - sz/2)|0;
 		y = (y - sz/2)|0;
 		app.canvas.ctx.drawImage(image, x, y, sz, sz);

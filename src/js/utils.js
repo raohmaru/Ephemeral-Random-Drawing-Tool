@@ -55,7 +55,7 @@ app.utils.eventDecorator = function(obj) {
 	};
 };
 
-app.utils.store = (function() {
+app.utils.memoize = (function() {
 	var memory = {};
 	
 	return function store(name, data) {
@@ -68,6 +68,15 @@ app.utils.store = (function() {
 		}
 	};
 })();
+
+app.utils.store = {
+	get: function(name) {
+		return JSON.parse(window.localStorage.getItem(name));
+	},
+	set: function(name, data) {
+		window.localStorage.setItem(name, JSON.stringify(data));
+	}
+};
 	
 	
 }(window.app || (window.app = {})));

@@ -83,6 +83,9 @@ canvas {
 	.settings select + label {
 		margin-left: .6em;
 	}
+	.settings__footer {
+		text-align: right;
+	}
 .footer {
 	position: absolute;
 	bottom: 0;

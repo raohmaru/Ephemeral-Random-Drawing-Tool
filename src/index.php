@@ -24,81 +24,86 @@
 	</canvas>
 	
 	<section class="settings">
-		<fieldset class="settings__fieldset">
-			<label for="settings-shape">Shape:</label>
-			<select name="shape" id="settings-shape">
-				<option value="1" selected>Square</option>
-				<option value="2">Circle</option>
-				<option value="3">Letter</option>
-				<option value="4">Line</option>
-				<option value="5">Image</option>
-			</select>
-			<label for="settings-fill">Fill</label>
-			<input type="checkbox" name="fill" id="settings-fill" value="1" accesskey="F" checked />
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-effect">Effect</label>
-			<select name="effect" id="settings-effect">
-				<option value="0">None</option>
-				<option value="1" selected>Horizontal</option>
-				<option value="2">Vertical</option>
-				<option value="3">Rotate</option>
-				<option value="4">Scale</option>
-				<option value="5">Skew</option>
-			</select>
-			<label for="settings-reverse">Reverse</label>
-			<input type="checkbox" name="reverse" id="settings-reverse" value="1" accesskey="R" />
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-color">Color:</label>
-			<select name="color" id="settings-color">
-				<option value="0" selected>None</option>
-				<option value="1">Marine</option>
-				<option value="2">Gold</option>
-				<option value="3">Ruby</option>
-				<option value="4">Watercolor</option>
-				<option value="5">Grass</option>
-				<option value="6">Rainbow</option>
-				<option value="-1">Random</option>
-			</select>
-			<label for="settings-mouse">Mouse</label>
-			<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked title="Move the pen with the mouse or the keyboard direction keys" />
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-size">Size:</label>
-			<input name="size" id="settings-size" type="range" min="1" max="50" step="1" value="10" />
-			<span id="settings-size__value" class="setting__value"></span>
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-variation">Variation:</label>
-			<input name="variation" id="settings-variation" type="range" min="0" max="30" step="1" value="10" />
-			<span id="settings-variation__value" class="setting__value"></span>
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-dispersion">Dispersion:</label>
-			<input name="dispersion" id="settings-dispersion" type="range" min="0" max="60" step="1" value="15" />
-			<span id="settings-dispersion__value" class="setting__value"></span>
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-spacing">Spacing:</label>
-			<input name="spacing" id="settings-spacing" type="range" min="0" max="10" step="1" value="2" />
-			<span id="settings-spacing__value" class="setting__value"></span>
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-speed">Speed:</label>
-			<input name="speed" id="settings-speed" type="range" min="1" max="10" step="1" value="1" />
-			<span id="settings-speed__value" class="setting__value"></span>
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-rotation">Rotation:</label>
-			<input name="rotation" id="settings-rotation" type="range" min="-90" max="90" step="1" value="0" />
-			<span id="settings-rotation__value" class="setting__value"></span>
-		</fieldset>
-		<fieldset class="settings__fieldset">
-			<label for="settings-ghost">Ghost:</label>
-			<input name="ghost" id="settings-ghost" type="range" min="1" max="10" step="1" value="7" />
-			<span id="settings-ghost__value" class="setting__value"></span>
-		</fieldset>
+		<form>			
+			<fieldset class="settings__fieldset">
+				<label for="settings-shape">Shape:</label>
+				<select name="shape" id="settings-shape">
+					<option value="1" selected>Square</option>
+					<option value="2">Circle</option>
+					<option value="3">Letter</option>
+					<option value="4">Line</option>
+					<option value="5">Image</option>
+				</select>
+				<label for="settings-fill">Fill</label>
+				<input type="checkbox" name="fill" id="settings-fill" value="1" accesskey="F" checked />
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-effect">Effect</label>
+				<select name="effect" id="settings-effect">
+					<option value="0">None</option>
+					<option value="1" selected>Horizontal</option>
+					<option value="2">Vertical</option>
+					<option value="3">Rotate</option>
+					<option value="4">Scale</option>
+					<option value="5">Skew</option>
+				</select>
+				<label for="settings-reverse">Reverse</label>
+				<input type="checkbox" name="reverse" id="settings-reverse" value="1" accesskey="R" />
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-color">Color:</label>
+				<select name="color" id="settings-color">
+					<option value="0" selected>None</option>
+					<option value="1">Marine</option>
+					<option value="2">Gold</option>
+					<option value="3">Ruby</option>
+					<option value="4">Watercolor</option>
+					<option value="5">Grass</option>
+					<option value="6">Rainbow</option>
+					<option value="-1">Random</option>
+				</select>
+				<label for="settings-mouse">Mouse</label>
+				<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked title="Move the pen with the mouse or the keyboard direction keys" />
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-size">Size:</label>
+				<input name="size" id="settings-size" type="range" min="1" max="50" step="1" value="10" />
+				<span id="settings-size__value" class="setting__value"></span>
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-variation">Variation:</label>
+				<input name="variation" id="settings-variation" type="range" min="0" max="30" step="1" value="10" />
+				<span id="settings-variation__value" class="setting__value"></span>
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-dispersion">Dispersion:</label>
+				<input name="dispersion" id="settings-dispersion" type="range" min="0" max="60" step="1" value="15" />
+				<span id="settings-dispersion__value" class="setting__value"></span>
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-spacing">Spacing:</label>
+				<input name="spacing" id="settings-spacing" type="range" min="0" max="10" step="1" value="2" />
+				<span id="settings-spacing__value" class="setting__value"></span>
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-speed">Speed:</label>
+				<input name="speed" id="settings-speed" type="range" min="1" max="10" step="1" value="1" />
+				<span id="settings-speed__value" class="setting__value"></span>
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-rotation">Rotation:</label>
+				<input name="rotation" id="settings-rotation" type="range" min="-90" max="90" step="1" value="0" />
+				<span id="settings-rotation__value" class="setting__value"></span>
+			</fieldset>
+			<fieldset class="settings__fieldset">
+				<label for="settings-ghost">Ghost:</label>
+				<input name="ghost" id="settings-ghost" type="range" min="1" max="10" step="1" value="7" />
+				<span id="settings-ghost__value" class="setting__value"></span>
+			</fieldset>
+			<fieldset class="settings__fieldset settings__footer">
+				<input type="button" value="Reset" class="button" data-app-comp="reset" />
+			</fieldset>		
+		</form>
 	</section>
 	
 	<footer class="footer" role="contentinfo">
@@ -126,6 +131,7 @@
 <script src="js/comp/canvas.js"></script>
 <script src="js/comp/save.js"></script>
 <script src="js/comp/pause.js"></script>
+<script src="js/comp/reset.js"></script>
 <script src="js/comp/share-twitter.js"></script>
 <!-- endbuild -->
 <script>
