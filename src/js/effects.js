@@ -11,6 +11,11 @@ var effectNone = function() {},
 	effectMoveVertical = function() {
 		app.canvas.redraw(0, 1*app.options.dir*app.options.speed);
 	},
+
+	effectMoveDiagonal = function() {
+		var n = 1*app.options.dir*app.options.speed;
+		app.canvas.redraw(-n, n);
+	},
 	
 	effectRotate = function() {
 		app.canvas.center();
@@ -55,9 +60,10 @@ var effectNone = function() {},
 app.effects.getById = function(id) {
 	if(id === 1) return effectMoveHorizontal;
 	if(id === 2) return effectMoveVertical;
-	if(id === 3) return effectRotate;
-	if(id === 4) return effectScale;
-	if(id === 5) return effectSkew;
+	if(id === 3) return effectMoveDiagonal;
+	if(id === 4) return effectRotate;
+	if(id === 5) return effectScale;
+	if(id === 6) return effectSkew;
 	return effectNone;
 };
 

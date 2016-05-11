@@ -43,9 +43,10 @@
 					<option value="0">None</option>
 					<option value="1" selected>Horizontal</option>
 					<option value="2">Vertical</option>
-					<option value="3">Rotate</option>
-					<option value="4">Scale</option>
-					<option value="5">Skew</option>
+					<option value="3">Diagonal</option>
+					<option value="4">Rotate</option>
+					<option value="5">Scale</option>
+					<option value="6">Skew</option>
 				</select>
 				<input type="checkbox" name="reverse" id="settings-reverse" value="1" accesskey="R" class="settings__input" />
 				<label class="settings__label" for="settings-reverse">Reverse</label>
