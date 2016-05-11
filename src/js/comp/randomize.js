@@ -17,7 +17,7 @@ function RandomButton(el){
 		});		
 		app.settings.update();
 	});
-};
+}
 
 [].forEach.call(document.querySelectorAll('[data-app-comp~=random]'), function(el){
 	RandomButton(el);

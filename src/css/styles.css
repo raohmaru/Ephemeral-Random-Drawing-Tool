@@ -9,7 +9,8 @@ body {
 }
 body,
 .button,
-.settings__input {	
+.settings__input,
+.settings__select {	
 	font-family: "Trebuchet MS", Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 a {
@@ -45,6 +46,9 @@ a:hover, a:focus {
 			text-shadow: none;
 			vertical-align: super;
 		}
+	.header__share-icon {
+		margin-left: 5px;
+	}
 .button {
 	padding: 0 .5em;
 	font-size: .875em;
@@ -65,7 +69,7 @@ canvas {
 }
 .settings {
 	position: absolute;
-	padding: .4em .7em;
+	padding: .4em 0 .4em .7em;
     top: 0;
     right: 0;
 	background-color: #47565c;
@@ -76,9 +80,20 @@ canvas {
 		border: 0;
 	}
 	.settings input[type="range"] {
-		width: 6em;
+		width: 11em;
 		vertical-align: middle;
+		margin: 0;
 		padding: 0; /* MS */
+	}
+	.settings__label {
+		display: inline-block;
+		min-width: 5em;
+	}
+	.settings__select {
+		min-width: 7em;
+		color: #FFF;
+		background-color: #6a818a;
+		border: 0;
 	}
 	.setting__value {
 		display: inline-block;
@@ -87,14 +102,16 @@ canvas {
 		color: #aaa;
 	}
 	.settings__label,
-	.settings__input {		
+	.settings__input,
+	.settings__select {		
 		font-size: .8em;
 	}
-	.settings__input + .settings__label {
+	.settings__select + .settings__input {
 		margin-left: .6em;
 	}
 	.settings__footer {
-		padding-top: .2em;
+		padding-top: .5em;
+		padding-right: .7em;
 		text-align: right;
 	}
 .footer {

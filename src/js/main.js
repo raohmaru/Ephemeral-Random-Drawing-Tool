@@ -100,9 +100,9 @@ function moveCursorByKeys() {
 		velocity.y /= 1.1;	
 		app.cursor.x += velocity.x;
 		app.cursor.y += velocity.y;	
-		if     (app.cursor.x < 0)          app.cursor.x = 0;
+		if     (app.cursor.x < 0)                    app.cursor.x = 0;
 		else if(app.cursor.x > app.canvas.intWidth)  app.cursor.x = app.canvas.intWidth;
-		if     (app.cursor.y < 0)          app.cursor.y = 0;
+		if     (app.cursor.y < 0)                    app.cursor.y = 0;
 		else if(app.cursor.y > app.canvas.intHeight) app.cursor.y = app.canvas.intHeight;
 	}
 }

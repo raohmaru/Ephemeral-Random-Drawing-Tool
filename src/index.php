@@ -13,10 +13,10 @@
 <body>
 <div class="wrapper">
 	<header class="header" role="banner">
-		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.3</span></h1>
+		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.4</span></h1>
 		<p><a href="javascript:;" class="button" title="Shortcut: P Key" data-app-comp="pause">Pause</a>
 			<a href="javascript:;" class="button" title="Shortcut: Ctrl + S" data-app-comp="save">Save image</a></p>
-		<p>Share your work <a href="http://twitter.com" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="18" height="18" class="icon" /></a></p>
+		<p>Share your work <a href="http://twitter.com" class="header__share-icon" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="18" height="18" class="icon" /></a></p>
 	</header>
 	
 	<canvas id="maincanvas" width="500" height="500">
@@ -27,19 +27,19 @@
 		<form>			
 			<fieldset class="settings__fieldset">
 				<label class="settings__label" for="settings-shape">Shape:</label>
-				<select name="shape" id="settings-shape" class="settings__input">
+				<select name="shape" id="settings-shape" class="settings__select">
 					<option value="1" selected>Square</option>
 					<option value="2">Circle</option>
 					<option value="3">Letter</option>
 					<option value="4">Line</option>
-					<option value="5">Image</option>
+					<option value="5">Atom</option>
 				</select>
-				<label class="settings__label" for="settings-fill">Fill</label>
 				<input type="checkbox" name="fill" id="settings-fill" value="1" accesskey="F" checked class="settings__input" />
+				<label class="settings__label" for="settings-fill">Fill</label>
 			</fieldset>
 			<fieldset class="settings__fieldset">
-				<label class="settings__label" for="settings-effect">Effect</label>
-				<select name="effect" id="settings-effect" class="settings__input">
+				<label class="settings__label" for="settings-effect">Effect:</label>
+				<select name="effect" id="settings-effect" class="settings__select">
 					<option value="0">None</option>
 					<option value="1" selected>Horizontal</option>
 					<option value="2">Vertical</option>
@@ -47,23 +47,25 @@
 					<option value="4">Scale</option>
 					<option value="5">Skew</option>
 				</select>
-				<label class="settings__label" for="settings-reverse">Reverse</label>
 				<input type="checkbox" name="reverse" id="settings-reverse" value="1" accesskey="R" class="settings__input" />
+				<label class="settings__label" for="settings-reverse">Reverse</label>
 			</fieldset>
 			<fieldset class="settings__fieldset">
 				<label class="settings__label" for="settings-color">Color:</label>
-				<select name="color" id="settings-color" class="settings__input">
+				<select name="color" id="settings-color" class="settings__select">
 					<option value="0" selected>None</option>
 					<option value="1">Marine</option>
 					<option value="2">Gold</option>
 					<option value="3">Ruby</option>
 					<option value="4">Watercolor</option>
 					<option value="5">Grass</option>
-					<option value="6">Rainbow</option>
+					<option value="6">Earth</option>
+					<option value="7">Rainbow</option>
+					<option value="8">Unicorn</option>
 					<option value="-1">Random</option>
 				</select>
-				<label class="settings__label" for="settings-mouse" title="Uncheck to move the pen with the keyboard direction keys">Mouse</label>
 				<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked class="settings__input" title="Uncheck to move the pen with the keyboard direction keys" />
+				<label class="settings__label" for="settings-mouse" title="Uncheck to move the pen with the keyboard direction keys">Mouse</label>
 			</fieldset>
 			<fieldset class="settings__fieldset">
 				<label class="settings__label" for="settings-size">Size:</label>
@@ -96,7 +98,7 @@
 				<span id="settings-rotation__value" class="setting__value"></span>
 			</fieldset>
 			<fieldset class="settings__fieldset">
-				<label class="settings__label" for="settings-ghost">Ghost:</label>
+				<label class="settings__label" for="settings-ghost">Trail:</label>
 				<input name="ghost" id="settings-ghost" type="range" min="1" max="10" step="1" value="7" class="settings__input" />
 				<span id="settings-ghost__value" class="setting__value"></span>
 			</fieldset>
