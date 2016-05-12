@@ -3,10 +3,8 @@
 	"eqeqeq": true,
 	"eqnull": true,
 	"expr": true,
-	"onevar": true,
 	"noarg": true,
 	"browser": true,
-	"trailing": true,
 	"undef": true,
 	"unused": "vars",
 	"globals": {
