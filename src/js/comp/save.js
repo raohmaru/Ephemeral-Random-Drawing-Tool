@@ -17,7 +17,7 @@ app.on('app:keydown', function(e){
 });
 
 function saveCanvas(e) {
-	var name = 'my-ephemeral-randon-drawing.png',
+	var name = 'my-ephemeral-random-drawing.png',
 		link;
 	// window.open(app.toDataURL());
 	if(app.canvas.msToBlob) {

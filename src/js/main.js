@@ -40,7 +40,7 @@ function start() {
 
 function keyboardListener(e) {
 	var pressed = e.type === 'keydown';
-	if(!app.options.mouse) {
+	if(app.options.keyboard) {
 		if     (e.keyCode === KEY_UP)    keys.up = pressed;
 		else if(e.keyCode === KEY_DOWN)  keys.down = pressed;
 		else if(e.keyCode === KEY_LEFT)  keys.left = pressed;
@@ -75,7 +75,7 @@ function optionsChanged(name, val) {
 }
 
 function draw() {
-	if(!app.options.mouse) {
+	if(app.options.keyboard) {
 		moveCursorByKeys();
 	}	
 	if(!app.options.spacing || spacingCount++ % app.options.spacing === 0) {
@@ -156,10 +156,11 @@ app.resume = function() {
 	return app;
 };
 
-app.uploadImage = function(title) {
+app.uploadImage = function(title, author) {
 	var imgdata = app.toDataURL('image/jpeg', 1),
 		params = 'imgdata=' + imgdata.replace('data:image/jpeg;base64,', '') +
 				 '&title=' + encodeURIComponent(title) +
+				 '&author=' + encodeURIComponent(author) +
 				 '&__csrftoken=' + encodeURIComponent(window.__csrftoken),
 		xhr = new XMLHttpRequest(),
 		api = app.utils.createCallbacksFor({}, ['done', 'end']);

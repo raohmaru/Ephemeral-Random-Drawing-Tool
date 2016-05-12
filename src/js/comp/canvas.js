@@ -8,7 +8,7 @@ var COLORSET = [
 		// Gold
 		['#f4da46', '#e9cb52', '#fbe384', '#ffe391', '#fcef94', '#fff200'],
 		// Ruby
-		['rgba(243,33,33,1,.75)', 'rgba(248,120,120,.75)', 'rgba(250,156,156,.75)', 'rgba(222,107,107,.75)'],
+		['rgba(255,0,0,.75)', 'rgba(243,33,33,1,.75)', 'rgba(248,120,120,.75)', 'rgba(250,156,156,.75)', 'rgba(222,107,107,.75)'],
 		// Watercolor
 		['rgba(176,187,223,.5)', 'rgba(30,210,179,.5)', 'rgba(166,227,234,.5)'],
 		// Grass
@@ -74,7 +74,7 @@ function Canvas(canvas, ctx) {
 function mouseListener(e) {
 	var canvas = this;
 	if(e.type === 'mousemove') {
-		if(app.options.mouse) {
+		if(!app.options.keyboard) {
 			app.cursor.x = e.clientX - canvas.left;
 			app.cursor.y = e.clientY - canvas.top;	
 		}		

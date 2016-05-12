@@ -28,11 +28,11 @@ proto.share = function(){
 		});
 	app.on('app:titleset', onTitleSet);
 	
-	function onTitleSet(title){
+	function onTitleSet(data){
 		modal.close();
-		app.uploadImage(title)
+		app.uploadImage(data.title, data.author)
 			.done(function(xhr){
-				var url = me.url + encodeURIComponent('http://raohmaru.com/lab/js/erdt/') + xhr.responseText;
+				var url = me.url + encodeURIComponent('http://raohmaru.com/lab/js/erdt/gallery/') + xhr.responseText;
 				app.utils.popup(url, 'twitter');
 			})			
 			.end(function(){

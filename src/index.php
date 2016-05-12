@@ -14,17 +14,18 @@
 <div class="wrapper">
 	<header class="header" role="banner">
 		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.5</span></h1>
-		<p><a href="javascript:;" class="button" title="Shortcut: P Key" data-app-comp="pause">Pause</a>
-			<a href="javascript:;" class="button" title="Shortcut: Ctrl + S" data-app-comp="save">Save image</a></p>
-		<p>Share your artwork
-			<a href="https://twitter.com" class="header__share-icon" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="18" height="18" class="icon" /></a>
-			<a href="https://facebook.com" class="header__share-icon" title="Share on Facebook" data-app-comp="share-facebook"><img src="img/facebook.svg" alt="Facebook" width="18" height="18" class="icon" /></a>
-		</p>
 	</header>
 	
-	<canvas id="maincanvas" width="500" height="500">
+	<canvas class="artwork" id="maincanvas" width="500" height="500">
 		Your browser doesn't support the canvas element <strong>:(</strong>
-	</canvas>
+	</canvas>	
+	<div class="toolbox">
+		<p><a href="javascript:;" class="button" title="Shortcut: P Key or double click on the canvas" data-app-comp="pause">Pause</a>
+			<a href="javascript:;" class="button" title="Shortcut: Ctrl + S" data-app-comp="save">Download image</a></p>
+		<p>Share your artwork!
+			<a href="https://twitter.com" class="header__share-icon" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="18" height="18" class="icon" /></a>
+			<a href="https://facebook.com" class="header__share-icon" title="Share on Facebook" data-app-comp="share-facebook"><img src="img/facebook.svg" alt="Facebook" width="18" height="18" class="icon" /></a>
+	</div>
 	
 	<section class="settings">
 		<form>			
@@ -68,8 +69,8 @@
 					<option value="8">Unicorn</option>
 					<option value="-1">Random</option>
 				</select>
-				<input type="checkbox" name="mouse" id="settings-mouse" value="1" accesskey="M" checked class="settings__input" title="Uncheck to move the pen with the keyboard direction keys" />
-				<label class="settings__label" for="settings-mouse" title="Uncheck to move the pen with the keyboard direction keys">Mouse</label>
+				<input type="checkbox" name="keyboard" id="settings-keyboard" value="1" accesskey="M" class="settings__input" title="Check to move the pencil with the keyboard direction keys" />
+				<label class="settings__label" for="settings-keyboard" title="Check to move the pen with the keyboard direction keys">Keyboard</label>
 			</fieldset>
 			<fieldset class="settings__fieldset">
 				<label class="settings__label" for="settings-size">Size:</label>
@@ -130,7 +131,9 @@
 		<div class="modal__body">
 			<h3>Plase title your ephemeral artwork</h3>
 			<form action="">
-				<input type="text" name="title" class="modal__input" placeholder="Your text here..." maxlength="50" />
+				<input type="text" name="title" class="modal__input" placeholder="Title..." maxlength="50" />
+				<h4 class="modal__subtitle">What is your pen name as an artist?</h4>
+				<input type="text" name="author" class="modal__input modal__input--md" placeholder="My pen name is..." maxlength="30" />
 				<div class="modal__footer">
 					<input type="submit" value="OK" class="button button--inverted" />
 					<input type="button" value="Cancel" class="button" data-app-modal-close />

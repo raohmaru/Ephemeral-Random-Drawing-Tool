@@ -2,27 +2,37 @@
 
 function AskTitle(el) {
 	var form = el.querySelector('form'),
-		inputText = el.querySelector('input[type="text"]');
+		inputs = [].slice.call(el.querySelectorAll('input[type="text"]'));
 	form.addEventListener('submit', onSubmit);
-	inputText.focus();
+	inputs[0].focus();
 	
 	function onSubmit(e) {
+		var error = false,
+			data = {};
 		e.preventDefault();
-		if(/^\s*$/.test(inputText.value) === false) {
-			inputText.classList.remove('input--error');
-			app.trigger('app:titleset', inputText.value);
-		}
-		else {
-			inputText.classList.add('input--error');
+		inputs.forEach(function(input){
+			if(/^\s*$/.test(input.value) === false) {
+				data[input.name] = input.value;
+				input.classList.remove('input--error');
+			}
+			else {
+				input.classList.add('input--error');
+				error = true;
+			}
+		});
+		if(!error) {
+			app.trigger('app:titleset', data);
 		}
 		return false;
 	}
 	
 	function dispose() {
 		form.removeEventListener('submit', onSubmit);
-		inputText.classList.remove('input--error');
+		inputs.forEach(function(input){
+			input.classList.remove('input--error');
+		});
 		form = null;
-		inputText = null;
+		inputs = null;
 	}	
 	
 	return {

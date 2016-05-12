@@ -7,7 +7,7 @@ function RandomButton(el){
 				input.value = app.utils.randomInt(+input.min, +input.max);
 			}
 			else if(input.type === 'checkbox') {
-				if(input.name !== 'mouse') {
+				if(input.name !== 'keyboard') {
 					input.checked = !!app.utils.randomInt(1);
 				}
 			}
