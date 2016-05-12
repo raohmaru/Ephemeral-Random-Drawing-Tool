@@ -114,6 +114,7 @@ function getColor(col) {
 	}	
 }
 
-app.Canvas = Canvas;
+app.comps = app.comps || {};
+app.comps.Canvas = Canvas;
 
 }(window.app || (window.app = {})));

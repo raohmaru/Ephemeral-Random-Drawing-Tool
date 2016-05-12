@@ -22,9 +22,9 @@ var KEY_LEFT   = 37,
 app.utils.eventDecorator(app);
 
 function start() {
-	app.canvas = app.Canvas(canvas, ctx);
+	app.canvas = app.comps.Canvas(canvas, ctx);
 	app.options = {};
-	app.settings = new app.Settings('.settings');
+	app.settings = new app.comps.Settings('.settings');
 	app.settings
 		.on('app:change', optionsChanged)
 		.init();
@@ -114,10 +114,8 @@ function setState(newState) {
 
 // Public methods
 app.toDataURL = function(type, encoderOptions) {
-	var isRunning = (state === 'running');
-	if(isRunning) {
-		app.pause();		
-	}
+	var wasRunning = (state === 'running');
+	app.pause();		
 	
 	var exportCanvas = document.createElement('canvas'),
 		exportCtx = exportCanvas.getContext('2d');
@@ -129,7 +127,7 @@ app.toDataURL = function(type, encoderOptions) {
 	exportCtx.fillRect(0, 0, app.canvas.intWidth, app.canvas.intHeight);
 	exportCtx.drawImage(canvas, 0, 0);
 	
-	if(isRunning) {
+	if(wasRunning) {
 		app.resume();
 	}
 	
@@ -146,6 +144,7 @@ app.pause = function(toggle) {
 	else if(toggle) {
 		app.resume();
 	}
+	return app;
 };
 
 app.resume = function() {
@@ -154,16 +153,18 @@ app.resume = function() {
 		setState('running');
 		app.trigger('app:resume');
 	}
+	return app;
 };
 
-app.uploadImage = function(doneFunc, endFunc) {
+app.uploadImage = function(title) {
 	var imgdata = app.toDataURL('image/jpeg', 1),
 		params = 'imgdata=' + imgdata.replace('data:image/jpeg;base64,', '') +
+				 '&title=' + encodeURIComponent(title) +
 				 '&__csrftoken=' + encodeURIComponent(window.__csrftoken),
-		xhr = new XMLHttpRequest();
+		xhr = new XMLHttpRequest(),
+		api = app.utils.createCallbacksFor({}, ['done', 'end']);
 	xhr.open('POST', 'gallery/upload', true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-	xhr.setRequestHeader("Content-length", params.length);
 	xhr.addEventListener("progress", function(e) {
 		if(e.lengthComputable) {
 			var percentComplete = (e.loaded / e.total) * 100;
@@ -172,19 +173,45 @@ app.uploadImage = function(doneFunc, endFunc) {
 	});
 	xhr.addEventListener("load", function(){
 		if(this.status === 200) {
-			doneFunc && doneFunc(this);
+			api.done(null, this);
 		}
 		else {
 			window.alert("An error occurred while saving your drawing to the cloud.\n Please try again later.");
 		}
-		endFunc && endFunc();
+		api.end();
 	});	
 	xhr.addEventListener("error", function(){
 		window.alert("An error occurred while saving your drawing to the cloud.\n Please try again later.");
-		endFunc && endFunc();
+		api.end();
 	});
 	xhr.send(params);
+	
+	return api;
 };
+
+app.openModal = function(modalName, callback) {
+	var wasRunning = (state === 'running'),
+		modal;
+	app.pause()
+	   .mute('app:keydown')
+	   .mute('app:keyup');
+	modal = app.comps.Modal(document.querySelector('[data-app-modal='+modalName+']'));
+	modal.onClose(function() {
+		if(wasRunning) {
+			app.resume();
+		}
+		app.unmute('app:keydown')
+		   .unmute('app:keyup');
+	});
+	return modal;
+};
+
+app.initComp = function(el) {
+	var comp = el.dataset.appComp;
+	return app.comps[comp] && app.comps[comp](el);
+};
+
+
 
 // App start
 document.addEventListener('DOMContentLoaded', function(){

@@ -78,6 +78,7 @@ function updateRangeValue(e) {
 	document.getElementById(tgt.id+'__value').textContent = parseInt(tgt.value, 10);
 }
 
-app.Settings = Settings;
+app.comps = app.comps || {};
+app.comps.Settings = Settings;
 
 }(window.app || (window.app = {})));

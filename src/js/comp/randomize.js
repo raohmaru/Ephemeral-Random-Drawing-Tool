@@ -4,7 +4,7 @@ function RandomButton(el){
 	el.addEventListener('click', function(){
 		app.settings.inputs.forEach(function(input) {
 			if(input.type === 'range') {
-				input.value = app.utils.randomInt(input.min, input.max);
+				input.value = app.utils.randomInt(+input.min, +input.max);
 			}
 			else if(input.type === 'checkbox') {
 				if(input.name !== 'mouse') {

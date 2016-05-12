@@ -13,10 +13,13 @@
 <body>
 <div class="wrapper">
 	<header class="header" role="banner">
-		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.4</span></h1>
+		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.5</span></h1>
 		<p><a href="javascript:;" class="button" title="Shortcut: P Key" data-app-comp="pause">Pause</a>
 			<a href="javascript:;" class="button" title="Shortcut: Ctrl + S" data-app-comp="save">Save image</a></p>
-		<p>Share your work <a href="http://twitter.com" class="header__share-icon" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="18" height="18" class="icon" /></a></p>
+		<p>Share your artwork
+			<a href="https://twitter.com" class="header__share-icon" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="18" height="18" class="icon" /></a>
+			<a href="https://facebook.com" class="header__share-icon" title="Share on Facebook" data-app-comp="share-facebook"><img src="img/facebook.svg" alt="Facebook" width="18" height="18" class="icon" /></a>
+		</p>
 	</header>
 	
 	<canvas id="maincanvas" width="500" height="500">
@@ -121,6 +124,22 @@
 	</aside>
 </div>
 
+<div class="modal" data-app-modal="ask-title">
+	<div class="modal__overlay"></div>
+	<div class="wrapper" data-app-comp="AskTitle">
+		<div class="modal__body">
+			<h3>Plase title your ephemeral artwork</h3>
+			<form action="">
+				<input type="text" name="title" class="modal__input" placeholder="Your text here..." />
+				<div class="modal__footer">
+					<input type="submit" value="OK" class="button button--inverted" />
+					<input type="button" value="Cancel" class="button" data-app-modal-close />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <div class="is-hidden">
 	<img src="img/atom.png" alt="Atom symbol" id="imgAsset" />
 </div>
@@ -137,7 +156,11 @@
 <script src="js/comp/pause.js"></script>
 <script src="js/comp/reset.js"></script>
 <script src="js/comp/randomize.js"></script>
+<script src="js/comp/share.js"></script>
 <script src="js/comp/share-twitter.js"></script>
+<script src="js/comp/share-facebook.js"></script>
+<script src="js/comp/modal.js"></script>
+<script src="js/comp/modal-asktitle.js"></script>
 <!-- endbuild -->
 <script>
 var __csrftoken = '<?php echo $_SESSION['csrf_token']; ?>';
