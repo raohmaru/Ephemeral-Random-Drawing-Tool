@@ -29,13 +29,14 @@ proto.share = function(){
 	app.on('app:titleset', onTitleSet);
 	
 	function onTitleSet(data){
-		modal.close();
+		modal.showLoading();
 		app.uploadImage(data.title, data.author)
 			.done(function(xhr){
 				var url = me.url + encodeURIComponent('http://raohmaru.com/lab/js/erdt/gallery/') + xhr.responseText;
 				app.utils.popup(url, 'twitter');
 			})			
 			.end(function(){
+				modal.close();
 				me.el.classList.remove('is-disabled');
 			});
 	}

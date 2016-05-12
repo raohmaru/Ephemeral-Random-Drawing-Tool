@@ -129,16 +129,19 @@
 	<div class="modal__overlay"></div>
 	<div class="wrapper" data-app-comp="AskTitle">
 		<div class="modal__body">
-			<h3>Plase title your ephemeral artwork</h3>
-			<form action="">
+			<form action="" class="modal__content">
+				<h3 class="modal__title">Please title your ephemeral artwork</h3>
 				<input type="text" name="title" class="modal__input" placeholder="Title..." maxlength="50" />
-				<h4 class="modal__subtitle">What is your pen name as an artist?</h4>
-				<input type="text" name="author" class="modal__input modal__input--md" placeholder="My pen name is..." maxlength="30" />
+				<h4 class="modal__subtitle">What is your artist name?</h4>
+				<input type="text" name="author" class="modal__input modal__input--md" placeholder="My artist name is..." maxlength="30" />
 				<div class="modal__footer">
 					<input type="submit" value="OK" class="button button--inverted" />
 					<input type="button" value="Cancel" class="button" data-app-modal-close />
 				</div>
 			</form>
+			<div class="modal__loading">
+				<span class="modal__loadingText">Uploading image to the artists' cloud</span>
+			</div>
 		</div>
 	</div>
 </div>
@@ -167,6 +170,14 @@
 <!-- endbuild -->
 <script>
 var __csrftoken = '<?php echo $_SESSION['csrf_token']; ?>';
+</script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+var _gaq=[['_setAccount','UA-28420764-1'],['_trackPageview']];
+(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 </body>
 </html>

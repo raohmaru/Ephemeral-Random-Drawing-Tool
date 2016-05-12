@@ -2,14 +2,19 @@
 
 function AskTitle(el) {
 	var form = el.querySelector('form'),
-		inputs = [].slice.call(el.querySelectorAll('input[type="text"]'));
+		inputs = [].slice.call(el.querySelectorAll('input[type="text"]')),
+		completed;
 	form.addEventListener('submit', onSubmit);
 	inputs[0].focus();
 	
 	function onSubmit(e) {
+		e.preventDefault();
+		if(completed) {
+			return false;
+		}
+		
 		var error = false,
 			data = {};
-		e.preventDefault();
 		inputs.forEach(function(input){
 			if(/^\s*$/.test(input.value) === false) {
 				data[input.name] = input.value;
@@ -22,6 +27,7 @@ function AskTitle(el) {
 		});
 		if(!error) {
 			app.trigger('app:titleset', data);
+			completed = true;
 		}
 		return false;
 	}

@@ -19,7 +19,7 @@ function Modal(el){
 	}
 	
 	function close() {
-		el.classList.remove('modal--open');		
+		el.classList.remove('modal--open', 'modal--is-loading');
 		el.querySelector('.modal__overlay').removeEventListener('click', close);
 		el.querySelector('[data-app-modal-close]').removeEventListener('click', close);	
 		window.removeEventListener('keyup', keyHandler);
@@ -31,8 +31,15 @@ function Modal(el){
 		comps = null;
 	}
 	
-	var api = app.utils.createCallbacksFor({}, 'onClose');
-	api.close = close;
+	function showLoading() {
+		el.classList.add('modal--is-loading');
+	}
+	
+	var api = {
+		close: close,
+		showLoading: showLoading
+	};
+	app.utils.createCallbacksFor(api, 'onClose');
 	return api;
 }
 
