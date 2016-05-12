@@ -9,7 +9,7 @@ var ShareTwitter = (function() {
 				   'hashtags=EphemeralRandomDrawing' +
 				   '&text=Check my Ephemeral Drawing!' +
 				   '&url=';
-	};
+	}
 	
 	return ShareTwitter;
 })();

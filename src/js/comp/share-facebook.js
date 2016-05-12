@@ -7,7 +7,7 @@ var ShareFacebook = (function() {
 		ShareFacebook.__super__.constructor.call(this, "facebook", el);
 		// http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters
 		this.url = 'https://www.facebook.com/sharer.php?&u=';
-	};
+	}
 	
 	return ShareFacebook;
 })();

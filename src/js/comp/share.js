@@ -38,7 +38,7 @@ proto.share = function(){
 			.end(function(){
 				me.el.classList.remove('is-disabled');
 			});
-	};
+	}
 };
 
 app.comps = app.comps || {};

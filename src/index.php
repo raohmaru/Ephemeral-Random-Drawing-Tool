@@ -130,7 +130,7 @@
 		<div class="modal__body">
 			<h3>Plase title your ephemeral artwork</h3>
 			<form action="">
-				<input type="text" name="title" class="modal__input" placeholder="Your text here..." />
+				<input type="text" name="title" class="modal__input" placeholder="Your text here..." maxlength="50" />
 				<div class="modal__footer">
 					<input type="submit" value="OK" class="button button--inverted" />
 					<input type="button" value="Cancel" class="button" data-app-modal-close />

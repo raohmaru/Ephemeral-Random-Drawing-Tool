@@ -76,7 +76,7 @@ app.utils.eventDecorator = function(obj) {
 	obj.unmute = function(eventName) {
 		disabled = disabled.filter(function(item){
 			return item !== eventName;
-		})
+		});
 		return this;
 	};
 };
@@ -142,10 +142,10 @@ app.utils.createCallbacksFor = function(obj, name) {
 				fns.length = 0;
 			}
 			return this;
-		}
+		};
 	})(name);
 	return obj;
-}
+};
 	
 	
 }(window.app || (window.app = {})));

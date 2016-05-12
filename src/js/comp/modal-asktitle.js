@@ -27,8 +27,8 @@ function AskTitle(el) {
 	
 	return {
 		dispose: dispose
-	}
-};
+	};
+}
 
 app.comps = app.comps || {};
 app.comps.AskTitle = AskTitle;
