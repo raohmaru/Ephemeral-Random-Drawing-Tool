@@ -163,7 +163,7 @@ app.uploadImage = function(title, author) {
 				 '&author=' + encodeURIComponent(author) +
 				 '&__csrftoken=' + encodeURIComponent(window.__csrftoken),
 		xhr = new XMLHttpRequest(),
-		api = app.utils.createCallbacksFor({}, ['done', 'end']);
+		api = app.utils.createCallbacksFor({}, ['done', 'error', 'end']);
 	xhr.open('POST', 'gallery/upload', true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 	xhr.addEventListener("progress", function(e) {
@@ -178,11 +178,13 @@ app.uploadImage = function(title, author) {
 		}
 		else {
 			window.alert("An error occurred while saving your drawing to the cloud.\n Please try again later.");
+			api.error(null, xhr);
 		}
 		api.end();
 	});	
 	xhr.addEventListener("error", function(){
 		window.alert("An error occurred while saving your drawing to the cloud.\n Please try again later.");
+		api.error(null, xhr);
 		api.end();
 	});
 	xhr.send(params);
@@ -209,7 +211,7 @@ app.openModal = function(modalName, callback) {
 
 app.initComp = function(el) {
 	var comp = el.dataset.appComp;
-	return app.comps[comp] && app.comps[comp](el);
+	return app.comps[comp] && app.comps[comp].apply(app.comps[comp], arguments);
 };
 
 

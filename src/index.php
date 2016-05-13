@@ -6,6 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Ephemeral Random Drawing Tool | raohmaru.com</title>
 	<meta name="viewport" content="width=device-width">
+	<meta name="title" content="Ephemeral Random Drawing Tool" />
+	<meta name="description" content="Create ephemeral drawings with an endless paint brush, in a canvas that erases itself" />
 	<!-- build:css -->
 	<link rel="stylesheet" href="css/styles.css" />
 	<!-- endbuild -->
@@ -21,10 +23,8 @@
 	</canvas>	
 	<div class="toolbox">
 		<p><a href="javascript:;" class="button" title="Shortcut: P Key or double click on the canvas" data-app-comp="pause">Pause</a>
-			<a href="javascript:;" class="button" title="Shortcut: Ctrl + S" data-app-comp="save">Download image</a></p>
-		<p>Share your artwork!
-			<a href="https://twitter.com" class="header__share-icon" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="18" height="18" class="icon" /></a>
-			<a href="https://facebook.com" class="header__share-icon" title="Share on Facebook" data-app-comp="share-facebook"><img src="img/facebook.svg" alt="Facebook" width="18" height="18" class="icon" /></a>
+			<a href="javascript:;" class="button button--inverted" title="Shortcut: Ctrl + S" data-app-comp="save">Download image</a></p>
+		<p><a href="javascript:;" data-app-comp="share">Share your artwork!</a></p>
 	</div>
 	
 	<section class="settings">
@@ -103,7 +103,7 @@
 				<span id="settings-rotation__value" class="setting__value"></span>
 			</fieldset>
 			<fieldset class="settings__fieldset">
-				<label class="settings__label" for="settings-ghost">Trail:</label>
+				<label class="settings__label" for="settings-ghost">Erase:</label>
 				<input name="ghost" id="settings-ghost" type="range" min="1" max="10" step="1" value="7" class="settings__input" />
 				<span id="settings-ghost__value" class="setting__value"></span>
 			</fieldset>
@@ -125,13 +125,13 @@
 	</aside>
 </div>
 
-<div class="modal" data-app-modal="ask-title">
+<div class="modal" data-app-modal="upload">
 	<div class="modal__overlay"></div>
-	<div class="wrapper" data-app-comp="AskTitle">
+	<div class="wrapper" data-app-comp="UploadModal">
 		<div class="modal__body">
-			<form action="" class="modal__content">
-				<h3 class="modal__title">Please title your ephemeral artwork</h3>
-				<input type="text" name="title" class="modal__input" placeholder="Title..." maxlength="50" />
+			<form action="" class="modal__content" data-app-modal-step>
+				<h3>First, put a title to your artwork</h3>
+				<input type="text" name="title" class="modal__input" placeholder="The title goes here..." maxlength="50" />
 				<h4 class="modal__subtitle">What is your artist name?</h4>
 				<input type="text" name="author" class="modal__input modal__input--md" placeholder="My artist name is..." maxlength="30" />
 				<div class="modal__footer">
@@ -139,8 +139,15 @@
 					<input type="button" value="Cancel" class="button" data-app-modal-close />
 				</div>
 			</form>
-			<div class="modal__loading">
-				<span class="modal__loadingText">Uploading image to the artists' cloud</span>
+			<div class="modal__content modal__loading" data-app-modal-step>
+				<span class="modal__loadingText">Uploading image to the artists' cloud...</span>
+			</div>
+			<div class="modal__content align-center" data-app-modal-step>
+				<p>Image uploaded!<br>
+					<a href="" target="_blank" class="modal__link" data-app-modal-url></a></p>
+				<h4 class="modal__subtitle">Share your artwork on</h4>
+				<a href="https://twitter.com" class="share-icon" title="Share on Twitter" data-app-comp="share-twitter"><img src="img/twitter.svg" alt="Twitter" width="36" height="36" class="icon" /></a>
+				<a href="https://facebook.com" class="share-icon" title="Share on Facebook" data-app-comp="share-facebook"><img src="img/facebook.svg" alt="Facebook" width="36" height="36" class="icon" /></a>
 			</div>
 		</div>
 	</div>
@@ -152,6 +159,7 @@
 
 <!-- build:js -->
 <script src="js/lib/raf.js"></script>
+<script src="js/config.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/effects.js"></script>
@@ -166,7 +174,7 @@
 <script src="js/comp/share-twitter.js"></script>
 <script src="js/comp/share-facebook.js"></script>
 <script src="js/comp/modal.js"></script>
-<script src="js/comp/modal-asktitle.js"></script>
+<script src="js/comp/modal-upload.js"></script>
 <!-- endbuild -->
 <script>
 var __csrftoken = '<?php echo $_SESSION['csrf_token']; ?>';

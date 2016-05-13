@@ -11,38 +11,29 @@ var proto = Share.prototype;
 proto.initialize = function(){
 	this.el.addEventListener('click', function(e){
 		e.preventDefault();
-		this.share();
+		if(this.url) {
+			this.share();			
+		}
+		else {
+			this.openUploadModal();
+		}
 	}.bind(this));
 };
 
 proto.share = function(){
-	if(this.el.classList.contains('is-disabled')) {
-		return;
-	}
-	var me = this;
-	this.el.classList.add('is-disabled');
-	var modal = app.openModal('ask-title')
-		.onClose(function(){
-			me.el.classList.remove('is-disabled');
-			app.off('app:titleset', onTitleSet);
-		});
-	app.on('app:titleset', onTitleSet);
-	
-	function onTitleSet(data){
-		modal.showLoading();
-		app.uploadImage(data.title, data.author)
-			.done(function(xhr){
-				var url = me.url + encodeURIComponent('http://raohmaru.com/lab/js/erdt/gallery/') + xhr.responseText;
-				app.utils.popup(url, 'twitter');
-			})			
-			.end(function(){
-				modal.close();
-				me.el.classList.remove('is-disabled');
-			});
-	}
+	var url = this.url + encodeURIComponent(app.cfg.url) + app.cfg.drawingID;
+	app.utils.popup(url, this.winname);
+};
+
+proto.openUploadModal = function(){
+	app.openModal('upload');
 };
 
 app.comps = app.comps || {};
 app.comps.Share = Share;
+
+[].forEach.call(document.querySelectorAll('[data-app-comp~=share]'), function(el){
+	new Share(null, el);
+});
 
 }(window.app || (window.app = {})));

@@ -3,13 +3,18 @@
 var	KEY_ESC = 27;
 	
 function Modal(el){	
+	var api = {
+		close: close
+	};
+	app.utils.createCallbacksFor(api, 'onClose');
+	
 	el.classList.add('modal--open');
 	el.querySelector('.modal__overlay').addEventListener('click', close);	
 	el.querySelector('[data-app-modal-close]').addEventListener('click', close);
 	window.addEventListener('keyup', keyHandler, false);
 	// Init components
 	var comps = [].map.call(el.querySelectorAll('[data-app-comp]'), function(el){
-		return app.initComp(el);
+		return app.initComp(el, api);
 	});
 	
 	function keyHandler(e){
@@ -19,7 +24,7 @@ function Modal(el){
 	}
 	
 	function close() {
-		el.classList.remove('modal--open', 'modal--is-loading');
+		el.classList.remove('modal--open');
 		el.querySelector('.modal__overlay').removeEventListener('click', close);
 		el.querySelector('[data-app-modal-close]').removeEventListener('click', close);	
 		window.removeEventListener('keyup', keyHandler);
@@ -31,15 +36,6 @@ function Modal(el){
 		comps = null;
 	}
 	
-	function showLoading() {
-		el.classList.add('modal--is-loading');
-	}
-	
-	var api = {
-		close: close,
-		showLoading: showLoading
-	};
-	app.utils.createCallbacksFor(api, 'onClose');
 	return api;
 }
 
