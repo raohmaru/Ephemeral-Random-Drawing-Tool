@@ -3,3 +3,4 @@ node_modules
 src/gallery/
 src/php/
 .htaccess
+src/img/*.jpg

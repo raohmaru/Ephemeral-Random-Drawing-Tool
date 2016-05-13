@@ -8,6 +8,17 @@
 	<meta name="viewport" content="width=device-width">
 	<meta name="title" content="Ephemeral Random Drawing Tool" />
 	<meta name="description" content="Create ephemeral drawings with an endless paint brush, in a canvas that erases itself" />
+	
+	<meta name="twitter:card"        content="summary_large_image">
+	<meta name="twitter:site"        content="@raulparralejo">
+	<meta name="twitter:title"       content="Ephemeral Random Drawing Tool">
+	<meta name="twitter:description" content="MadeCreate ephemeral drawings with an endless paint brush, in a canvas that erases itself">
+	<meta name="twitter:image"       content="http://raohmaru.com/lab/js/erdt/img/ephemeral-random-drawing.jpg">
+	
+	<meta property="og:url"          content="http://raohmaru.com/lab/js/erdt/" />
+	<meta property="og:title"        content="Ephemeral Random Drawing Tool" />
+	<meta property="og:description"  content="Create ephemeral drawings with an endless paint brush, in a canvas that erases itself" />
+	<meta property="og:image"        content="http://raohmaru.com/lab/js/erdt/img/ephemeral-random-drawing.jpg" />
 	<!-- build:css -->
 	<link rel="stylesheet" href="css/styles.css" />
 	<!-- endbuild -->
@@ -24,7 +35,8 @@
 	<div class="toolbox">
 		<p><a href="javascript:;" class="button" title="Shortcut: P Key or double click on the canvas" data-app-comp="pause">Pause</a>
 			<a href="javascript:;" class="button button--inverted" title="Shortcut: Ctrl + S" data-app-comp="save">Download image</a></p>
-		<p><a href="javascript:;" data-app-comp="share">Share your artwork!</a></p>
+		<p><img src="img/share.svg" alt="Share" width="16" height="16" class="icon" />
+			<a href="javascript:;" data-app-comp="share">Share your artwork!</a></p>
 	</div>
 	
 	<section class="settings">
@@ -49,7 +61,7 @@
 					<option value="2">Vertical</option>
 					<option value="3">Diagonal</option>
 					<option value="4">Rotate</option>
-					<option value="5">Scale</option>
+					<option value="5">Zoom</option>
 					<option value="6">Skew</option>
 				</select>
 				<input type="checkbox" name="reverse" id="settings-reverse" value="1" accesskey="R" class="settings__input" />
@@ -104,7 +116,7 @@
 			</fieldset>
 			<fieldset class="settings__fieldset">
 				<label class="settings__label" for="settings-ghost">Erase:</label>
-				<input name="ghost" id="settings-ghost" type="range" min="1" max="10" step="1" value="7" class="settings__input" />
+				<input name="ghost" id="settings-ghost" type="range" min="1" max="10" step="1" value="10" class="settings__input" />
 				<span id="settings-ghost__value" class="setting__value"></span>
 			</fieldset>
 			<fieldset class="settings__fieldset settings__footer">
