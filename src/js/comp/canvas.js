@@ -62,9 +62,14 @@ function Canvas(canvas, ctx) {
 		ctx.drawImage(canvas, x, y);
 	};
 	
-	canvas.reset = function() {
+	canvas.resetTransform = function() {
 		// reset current transformation matrix to the identity matrix
 		ctx.setTransform(1, 0, 0, 1, 0, 0);
+	};
+	
+	canvas.clear = function() {
+		ctx.fillStyle = 'rgb(0,0,0)';
+		ctx.fillRect(0, 0, canvas.intWidth, canvas.intHeight);
 	};
 	
 	return canvas;

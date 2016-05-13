@@ -3,6 +3,7 @@
 function ResetButton(el){
 	el.addEventListener('click', function(){
 		app.settings.reset();
+		app.canvas.clear();
 	});
 }
 

@@ -72,7 +72,7 @@ function preDraw(x, y) {
 
 function postDraw(param) {
 	if(app.options.rotation) {
-		app.canvas.reset();
+		app.canvas.resetTransform();
 	}
 }
 

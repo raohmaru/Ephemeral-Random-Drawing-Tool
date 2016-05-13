@@ -21,7 +21,7 @@ var effectNone = function() {},
 		app.canvas.center();
 		app.canvas.ctx.rotate(.01*app.options.dir*app.options.speed);
 		app.canvas.redraw(-app.canvas.intWidth/2, -app.canvas.intHeight/2);
-		app.canvas.reset();
+		app.canvas.resetTransform();
 	},
 	
 	effectScale = function() {
@@ -35,7 +35,7 @@ var effectNone = function() {},
 			app.canvas.ctx.scale(scale, scale);
 		}
 		app.canvas.redraw(-app.canvas.intWidth/2, -app.canvas.intHeight/2);
-		app.canvas.reset();
+		app.canvas.resetTransform();
 	},
 	
 	effectSkew = function() {
@@ -54,7 +54,7 @@ var effectNone = function() {},
 			0
 		);
 		app.canvas.redraw();
-		app.canvas.reset();
+		app.canvas.resetTransform();
 	};
 
 app.effects.getById = function(id) {
