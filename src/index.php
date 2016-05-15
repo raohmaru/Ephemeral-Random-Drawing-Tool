@@ -26,7 +26,7 @@
 <body>
 <div class="wrapper">
 	<header class="header" role="banner">
-		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.5</span></h1>
+		<h1 class="header__title">Ephemeral Random Drawing Tool <span class="header__version">v0.8.6</span></h1>
 	</header>
 	
 	<canvas class="artwork" id="maincanvas" width="500" height="500">

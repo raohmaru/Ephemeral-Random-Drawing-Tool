@@ -1,6 +1,6 @@
 {
   "name": "ephemeral-random-drawing-tool",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "Drawing tool on a HTML5 canvas",
   "main": "gulpfile.js",
   "dependencies": {},
