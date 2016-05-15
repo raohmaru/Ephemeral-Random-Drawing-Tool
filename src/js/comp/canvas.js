@@ -7,7 +7,7 @@ function Canvas(canvas, ctx) {
 	canvas.addEventListener('mousemove', mouseListener);
 	canvas.addEventListener('dblclick', mouseListener);
 	window.addEventListener('resize', resizeCanvas.bind(canvas), false);
-	resizeCanvas.call(canvas);
+	resizeCanvas(canvas);
 	
 	// Public methods
 	canvas.drawShape = function(x, y, shapeFunc) {
@@ -56,7 +56,7 @@ function Canvas(canvas, ctx) {
 
 
 function mouseListener(e) {
-	var canvas = this;
+	var canvas = e.currentTarget;
 	if(e.type === 'mousemove') {
 		if(!app.options.keyboard) {
 			app.cursor.x = e.clientX - canvas.left;
@@ -68,8 +68,8 @@ function mouseListener(e) {
 	}
 }
 
-function resizeCanvas() {
-	var canvas = this,
+function resizeCanvas(e) {
+	var canvas = e.currentTarget || e,
 		rect = canvas.getBoundingClientRect();
 	canvas.top    = rect.top    | 0;
 	canvas.right  = rect.right  | 0;
