@@ -36,7 +36,7 @@
 		<p><a href="javascript:;" class="button" title="Shortcut: P Key or double click on the canvas" data-app-comp="pause">Pause</a>
 			<a href="javascript:;" class="button button--inverted" title="Shortcut: Ctrl + S" data-app-comp="save">Download image</a></p>
 		<p><img src="img/share.svg" alt="Share" width="16" height="16" class="icon" />
-			<a href="javascript:;" data-app-comp="share">Share your artwork!</a></p>
+			<a href="javascript:;" data-app-comp="share">Share your artwork</a></p>
 	</div>
 	
 	<section class="settings">

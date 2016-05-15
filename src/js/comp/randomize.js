@@ -2,21 +2,7 @@
 
 function RandomButton(el){
 	el.addEventListener('click', function(){
-		app.settings.inputs.forEach(function(input) {
-			if(input.type === 'range') {
-				if(input.name !== 'ghost') {
-					input.value = app.utils.randomInt(+input.min, +input.max);
-				}
-			}
-			else if(input.type === 'checkbox') {
-				if(input.name !== 'keyboard') {
-					input.checked = !!app.utils.randomInt(1);
-				}
-			}
-			else {
-				input.value = input.options[app.utils.randomInt(input.options.length-1)].value;
-			}
-		});		
+		app.settings.randomize();
 		app.settings.update();
 	});
 }
@@ -24,5 +10,8 @@ function RandomButton(el){
 [].forEach.call(document.querySelectorAll('[data-app-comp~=random]'), function(el){
 	RandomButton(el);
 });
+
+app.comps = app.comps || {};
+app.comps.Randomize = RandomButton;
 
 }(window.app || (window.app = {})));

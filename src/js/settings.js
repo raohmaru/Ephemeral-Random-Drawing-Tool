@@ -12,12 +12,15 @@ function Settings(selector){
 var proto = Settings.prototype;
 
 proto.init = function() {
-	var defaults = app.utils.store.get('erdt-settings') || {};
+	var defaults = app.utils.store.get('erdt-settings');
 	this.inputs = this.el.querySelectorAll('select, input[type="range"], input[type="checkbox"]');
 	this.inputs = [].slice.call(this.inputs);  // To array
+	if(!defaults) {
+		this.randomize();
+	}
 	
 	this.inputs.forEach(function(input) {
-		if(defaults[input.name] !== undefined) {
+		if(defaults && defaults[input.name] !== undefined) {
 			if(input.type === 'checkbox') {
 				input.checked = defaults[input.name];
 			}
@@ -32,7 +35,7 @@ proto.init = function() {
 		setValue(input);
 	});
 	
-	app.utils.store.set('erdt-settings', app.options);	
+	// app.utils.store.set('erdt-settings', app.options);
 	return this;
 };
 
@@ -53,6 +56,24 @@ proto.update = function() {
 		setValue(input);
 	});
 	app.utils.store.set('erdt-settings', app.options);	
+};
+
+proto.randomize = function() {
+	this.inputs.forEach(function(input) {
+		if(input.type === 'range') {
+			if(input.name !== 'ghost') {
+				input.value = app.utils.randomInt(+input.min, +input.max);
+			}
+		}
+		else if(input.type === 'checkbox') {
+			if(input.name !== 'keyboard') {
+				input.checked = !!app.utils.randomInt(1);
+			}
+		}
+		else {
+			input.value = input.options[app.utils.randomInt(input.options.length-1)].value;
+		}
+	});
 };
 
 function setValue(e) {
