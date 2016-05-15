@@ -13,11 +13,6 @@ var canvas = document.getElementById('maincanvas'),
 		y: 0
 	},
 	ctx, fill_clear, effectFunc, shapeFunc, rafId, state;
-// Constants
-var KEY_LEFT   = 37,
-	KEY_UP     = 38,
-	KEY_RIGHT  = 39,
-	KEY_DOWN   = 40;
 
 app.utils.eventDecorator(app);
 
@@ -41,10 +36,10 @@ function start() {
 function keyboardListener(e) {
 	var pressed = e.type === 'keydown';
 	if(app.options.keyboard) {
-		if     (e.keyCode === KEY_UP)    keys.up = pressed;
-		else if(e.keyCode === KEY_DOWN)  keys.down = pressed;
-		else if(e.keyCode === KEY_LEFT)  keys.left = pressed;
-		else if(e.keyCode === KEY_RIGHT) keys.right = pressed;
+		if     (e.keyCode === app.cfg.KEY_UP)    keys.up = pressed;
+		else if(e.keyCode === app.cfg.KEY_DOWN)  keys.down = pressed;
+		else if(e.keyCode === app.cfg.KEY_LEFT)  keys.left = pressed;
+		else if(e.keyCode === app.cfg.KEY_RIGHT) keys.right = pressed;
 	}	
 	app.trigger('app:'+e.type, e);
 }

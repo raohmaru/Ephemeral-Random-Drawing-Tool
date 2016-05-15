@@ -1,7 +1,5 @@
 ;(function (app) { 'use strict';
 
-var KEY_P = 80;
-
 function PauseButton(el){
 	el.addEventListener('click', function(){
 		app.pause(true);
@@ -16,7 +14,7 @@ function PauseButton(el){
 }
 
 app.on('app:keyup', function(e){	
-	if(e.keyCode === KEY_P) {
+	if(e.keyCode === app.cfg.KEY_P) {
 		app.pause(true);
 	}
 });

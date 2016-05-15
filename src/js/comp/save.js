@@ -1,7 +1,4 @@
 ;(function (app) { 'use strict';
-
-var	KEY_S     = 83,
-	KEY_CMD_S = 19;  // OS X webkit browsers
 	
 function SaveButton(el){
 	el.addEventListener('click', saveCanvas);
@@ -9,7 +6,7 @@ function SaveButton(el){
 
 app.on('app:keydown', function(e){	
 	// Capture Ctrl + S		
-	if(e.keyCode === KEY_S && (e.ctrlKey || e.metaKey) || e.keyCode === KEY_CMD_S) {
+	if(e.keyCode === app.cfg.KEY_S && (e.ctrlKey || e.metaKey) || e.keyCode === app.cfg.KEY_CMD_S) {
 		e.preventDefault();
 		saveCanvas();
 		return false;

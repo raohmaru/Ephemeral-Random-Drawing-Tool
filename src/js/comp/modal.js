@@ -1,6 +1,4 @@
 ;(function (app) { 'use strict';
-
-var	KEY_ESC = 27;
 	
 function Modal(el){	
 	var api = {
@@ -18,7 +16,7 @@ function Modal(el){
 	});
 	
 	function keyHandler(e){
-		if(e.keyCode === KEY_ESC) {
+		if(e.keyCode === app.cfg.KEY_ESC) {
 			close();
 		}
 	}
