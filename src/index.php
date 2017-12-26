@@ -13,12 +13,12 @@
 	<meta name="twitter:site"        content="@raulparralejo">
 	<meta name="twitter:title"       content="Ephemeral Random Drawing Tool">
 	<meta name="twitter:description" content="MadeCreate ephemeral drawings with an endless paint brush, in a canvas that erases itself">
-	<meta name="twitter:image"       content="http://raohmaru.com/lab/js/erdt/img/ephemeral-random-drawing.jpg">
+	<meta name="twitter:image"       content="https://raohmaru.com/lab/js/erdt/img/ephemeral-random-drawing.jpg">
 	
-	<meta property="og:url"          content="http://raohmaru.com/lab/js/erdt/" />
+	<meta property="og:url"          content="https://raohmaru.com/lab/js/erdt/" />
 	<meta property="og:title"        content="Ephemeral Random Drawing Tool" />
 	<meta property="og:description"  content="Create ephemeral drawings with an endless paint brush, in a canvas that erases itself" />
-	<meta property="og:image"        content="http://raohmaru.com/lab/js/erdt/img/ephemeral-random-drawing.jpg" />
+	<meta property="og:image"        content="https://raohmaru.com/lab/js/erdt/img/ephemeral-random-drawing.jpg" />
 	<!-- build:css -->
 	<link rel="stylesheet" href="css/styles.css" />
 	<!-- endbuild -->
@@ -133,7 +133,7 @@
 	</footer>
 	
 	<aside role="complementary" class="siteinfo">
-		<p>&copy; 2016 <a href="http://raohmaru.com/" target="_blank">raohmaru.com <img src="http://raohmaru.com/img/raohmaru_logo_white.png" class="siteinfo__logo" alt="raohmaru.com logo" width="26" /></a></p>
+		<p>&copy; 2016 <a href="https://raohmaru.com/" target="_blank">raohmaru.com <img src="/img/raohmaru_logo_white.png" class="siteinfo__logo" alt="raohmaru.com logo" width="26" /></a></p>
 	</aside>
 </div>
 
