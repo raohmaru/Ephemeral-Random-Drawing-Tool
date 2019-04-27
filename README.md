@@ -6,7 +6,7 @@ Move the mouse or use the keyboard arrows to draw random shapes of random colour
 with an endless paint brush, in a canvas that erases itself. Your drawings while lasts a few seconds
 on the screen, that becomes an random, ephemeral work of art.
 
-[Starg drawing!](https://raohmaru.com/lab/js/erdt/)
+[Start drawing!](https://raohmaru.com/lab/js/erdt/)
 
 ## Hints
 + Change the settings of the paint brush or the canvas in the settings dialog at the top right of the screen.
